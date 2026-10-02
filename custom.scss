@@ -1,0 +1,234 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap');
+
+// Warna dasar. Biru diambil dari palet Okabe-Ito yang dipakai di grafik,
+// supaya halaman dan visualisasinya terbaca sebagai satu sistem.
+$primary:        #0072B2;
+$body-bg:        #fbfaf8;
+$body-color:     #1c2024;
+$link-color:     #0072B2;
+$border-color:   #e4e0d9;
+
+$font-family-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+$headings-font-family:   "Source Serif 4", Georgia, serif;
+$font-size-root:         17px;
+$line-height-base:       1.65;
+
+$headings-font-weight:   600;
+$h1-font-size:           2.4rem;
+$h2-font-size:           1.75rem;
+$h3-font-size:           1.3rem;
+
+$toc-font-size:          0.85rem;
+$code-block-bg:          #f4f2ee;
+
+/*-- scss:rules --*/
+
+// ---- Kepala halaman -------------------------------------------------------
+
+#title-block-header {
+  border-bottom: 3px solid $body-color;
+  padding-bottom: 1.6rem;
+  margin-bottom: 2.5rem;
+
+  .title {
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+  .subtitle {
+    font-family: $font-family-sans-serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: #5a6169;
+    max-width: 46rem;
+    line-height: 1.5;
+  }
+  .quarto-title-meta {
+    font-family: $font-family-sans-serif;
+    font-size: 0.82rem;
+    color: #70767d;
+    border-top: 1px solid $border-color;
+    padding-top: 0.9rem;
+    margin-top: 1.2rem;
+  }
+}
+
+// ---- Judul bagian ---------------------------------------------------------
+
+h1:not(.title) {
+  margin-top: 3.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid $border-color;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  margin-top: 2.4rem;
+  color: #2b3137;
+}
+
+// Paragraf pengantar tiap bagian sedikit lebih besar
+h1 + p {
+  font-size: 1.08rem;
+  color: #3d444b;
+}
+
+// ---- Kartu angka ringkasan ------------------------------------------------
+
+.card {
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  h3 {
+    font-family: $font-family-sans-serif;
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: $primary;
+    margin: 0 0 0.2rem 0;
+    letter-spacing: -0.02em;
+    border: none;
+  }
+
+  // teks di bawah angka
+  p {
+    font-size: 0.82rem;
+    line-height: 1.35;
+    color: #5a6169;
+    margin: 0;
+  }
+}
+
+// ---- Grafik ---------------------------------------------------------------
+
+.plotly, .visNetwork, .html-widget {
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  padding: 0.6rem;
+  margin: 1.4rem 0;
+}
+
+// ---- Tab ------------------------------------------------------------------
+
+.panel-tabset {
+  margin: 1.8rem 0;
+
+  .nav-tabs {
+    border-bottom: 2px solid $border-color;
+    gap: 0.3rem;
+
+    .nav-link {
+      font-family: $font-family-sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6b7178;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+
+      &:hover { color: $primary; }
+
+      &.active {
+        color: $primary;
+        background: transparent;
+        border-bottom: 2px solid $primary;
+      }
+    }
+  }
+}
+
+// ---- Tabel ----------------------------------------------------------------
+
+table.dataTable {
+  font-size: 0.85rem;
+
+  thead th {
+    font-family: $font-family-sans-serif;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7178;
+    border-bottom: 2px solid $body-color !important;
+  }
+}
+
+.dataTables_filter input,
+.form-select,
+.selectize-input {
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+// Penyaring crosstalk
+.filter-option, .control-label {
+  font-family: $font-family-sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7178;
+}
+
+// ---- Callout --------------------------------------------------------------
+
+.callout {
+  border-radius: 8px;
+  border-left-width: 4px;
+  background: #fff;
+  font-size: 0.97rem;
+}
+
+// ---- Kode -----------------------------------------------------------------
+
+details > summary {
+  font-family: $font-family-sans-serif;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #868d94;
+  cursor: pointer;
+}
+
+pre code { font-size: 0.78rem; }
+
+// ---- Daftar isi -----------------------------------------------------------
+
+#TOC {
+  font-family: $font-family-sans-serif;
+
+  .nav-link {
+    color: #70767d;
+    padding: 0.2rem 0;
+    border-left: 2px solid transparent;
+    padding-left: 0.7rem;
+
+    &.active {
+      color: $primary;
+      font-weight: 500;
+      border-left-color: $primary;
+    }
+  }
+}
+
+// ---- Ponsel ---------------------------------------------------------------
+// Soal mensyaratkan tampilan terbuka dengan baik di laptop maupun ponsel.
+
+@media (max-width: 768px) {
+  #title-block-header .title { font-size: 2rem; }
+  h1:not(.title)             { font-size: 1.6rem; margin-top: 2.4rem; }
+  .card h3                   { font-size: 1.7rem; }
+  body                       { font-size: 16px; }
+
+  .html-widget { padding: 0.3rem; }
+
+  // kartu angka menumpuk, bukan berdesakan empat kolom
+  .quarto-layout-row { flex-direction: column; }
+  .quarto-layout-cell { width: 100% !important; margin-bottom: 0.7rem; }
+}

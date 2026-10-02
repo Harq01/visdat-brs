@@ -1,0 +1,16 @@
+# Jangan pernah commit token API
+.Renviron
+.Rhistory
+.RData
+.Rproj.user/
+
+# Data mentah boleh di-commit (ukurannya kecil, dan soal meminta "data terolah"
+# ada di repo). Yang dikecualikan hanya file besar hasil unduhan PDF.
+data/pdf/
+
+# Output render
+_site/
+docs/.quarto/
+.quarto/
+
+/.quarto/
