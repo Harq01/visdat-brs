@@ -69,9 +69,9 @@ brs_url <- function(page = 1, year = "", month = "", keyword = "",
 }
 
 brs_call <- function(page = 1, year = "", tries = 3) {
-  
+
   url <- brs_url(page = page, year = year)
-  
+
   res <- NULL
   for (attempt in seq_len(tries)) {
     res <- tryCatch(
@@ -84,46 +84,45 @@ brs_call <- function(page = 1, year = "", tries = 3) {
     if (!is.null(res)) break
     Sys.sleep(2 * attempt)
   }
-  
+
   if (is.null(res)) {
     stop("Gagal menghubungi WebAPI setelah ", tries, " percobaan ",
          "(tahun ", year, ", halaman ", page, "). Cek koneksi internet.",
          call. = FALSE)
   }
-  
+
   if (!identical(res$status, "OK")) {
     stop("WebAPI menolak permintaan: ",
          if (!is.null(res$message)) res$message else "tanpa pesan",
          "\nBiasanya ini berarti token salah atau belum aktif.",
          call. = FALSE)
   }
-  
+
   if (is.null(res$data) || identical(res$data, "") || length(res$data) < 2) {
     return(list(meta = NULL, items = NULL))
   }
-  
+
   list(meta = res$data[[1]], items = res$data[[2]])
 }
 
 # ---- Seluruh halaman untuk satu tahun --------------------------------------
 
 fetch_year <- function(year) {
-  
+
   message("Tahun ", year, " ...")
   first <- brs_call(page = 1, year = year)
-  
+
   if (is.null(first$items)) {
     message("  (kosong)")
     return(NULL)
   }
-  
+
   pages <- suppressWarnings(as.integer(first$meta$pages))
   if (length(pages) != 1 || is.na(pages) || pages < 1) pages <- 1
-  
+
   out <- list(first$items)
-  
-  # CATATAN: stadata memakai range(2, pages) yang melewatkan halaman terakhir.
-  # Di sini seq(2, pages) supaya halaman terakhir ikut terambil.
+
+  # seq(2, pages), bukan seq_len(pages - 1), agar halaman terakhir ikut terambil
   if (pages > 1) {
     for (p in seq(2, pages)) {
       pg <- brs_call(page = p, year = year)
@@ -132,7 +131,7 @@ fetch_year <- function(year) {
       Sys.sleep(0.3)   # jeda sopan terhadap server BPS
     }
   }
-  
+
   df <- dplyr::bind_rows(out)
   message("  ", nrow(df), " dokumen (", pages, " halaman)")
   df
@@ -156,8 +155,8 @@ brs_raw <- brs_raw |>
   dplyr::select(dplyr::any_of(keep_cols)) |>
   dplyr::distinct(brs_id, .keep_all = TRUE)
 
-# PENTING: simpan lebih dulu, sebelum pengolahan apa pun.
-# Kalau parsing tanggal di bawah bermasalah, hasil unduhan tidak ikut hilang.
+# Korpus disimpan lebih dulu, sebelum pengolahan apa pun, agar kegagalan
+# parsing tanggal tidak menghilangkan hasil unduhan.
 readr::write_csv(brs_raw, file.path(OUTDIR, "brs_raw.csv"))
 message("\nTersimpan: ", file.path(OUTDIR, "brs_raw.csv"),
         " (", nrow(brs_raw), " baris)")

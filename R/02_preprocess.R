@@ -1,19 +1,16 @@
 # =============================================================================
-# 02_preprocess.R  (revisi 2)
+# 02_preprocess.R
 # Pra-pemrosesan korpus Berita Resmi Statistik BPS
 #
-# Perubahan dari revisi 1, berdasarkan audit kamus_stem.csv:
-#   (a) Pembersihan HTML kini membedakan tag BLOK dan tag INLINE.
-#       Sebelumnya semua tag dihapus tanpa spasi sehingga kata bersambung
-#       ("surveihargaprodusenberasdipenggilingan"); kalau semua diganti spasi,
-#       kata justru terbelah ("ter de presiasi"). Pemisahan ini memperbaiki
-#       keduanya sekaligus.
-#   (b) Daftar ISTILAH TERLINDUNGI: nama diri, nama wilayah, dan akronim
-#       dikecualikan dari stemming. Nazief & Andriani tidak mengenali nama
-#       diri, sehingga "Bali"->"bal", "Bekasi"->"bekas", "ASEAN"->"ase".
-#   (c) Penyaringan frekuensi minimum untuk membuang salah ketik sumber
-#       ("febuari", "janauri", "tngkat") dan sisa token gabungan.
-#   (d) Stopword Bahasa Inggris, karena sebagian abstrak BRS dwibahasa.
+# Tahapan:
+#   1. Pembersihan markup HTML/Word dari abstrak, membedakan tag blok dan
+#      tag inline agar kata tidak tersambung maupun terbelah.
+#   2. Pelekatan taksonomi CSA v1.1 berdasarkan subj_id.
+#   3. Case folding dan tokenisasi.
+#   4. Penyaringan stopword Bahasa Indonesia dan Bahasa Inggris, stopword
+#      khusus korpus, serta ambang frekuensi minimum.
+#   5. Stemming Nazief & Andriani atas kosakata unik, dengan daftar istilah
+#      terlindungi untuk nama diri dan akronim.
 #
 # Input : data/raw/brs_raw.csv
 # Output: data/processed/brs_docs.csv
@@ -45,19 +42,19 @@ TAG_BLOK <- "p|div|br|li|ul|ol|tr|td|th|table|h[1-6]|section|article|blockquote"
 
 bersihkan_html <- function(x) {
   x <- as.character(x); x[is.na(x)] <- ""
-  
+
   # Komentar kondisional MSO dan blok non-teks
   x <- str_remove_all(x, regex("<!--.*?-->", dotall = TRUE))
   x <- str_remove_all(x, regex("<xml.*?</xml>", dotall = TRUE, ignore_case = TRUE))
   x <- str_remove_all(x, regex("<style.*?</style>", dotall = TRUE, ignore_case = TRUE))
   x <- str_remove_all(x, regex("<script.*?</script>", dotall = TRUE, ignore_case = TRUE))
-  
+
   # Tag BLOK -> spasi (memisahkan kata antar paragraf/sel tabel)
   x <- str_replace_all(x, regex(paste0("</?(?:", TAG_BLOK, ")\\b[^>]*>"),
                                 ignore_case = TRUE), " ")
   # Tag INLINE -> dihapus (menyambung kata yang terbelah <span>)
   x <- str_remove_all(x, "<[^>]+>")
-  
+
   # Entitas HTML yang umum muncul
   x <- str_replace_all(x, c(
     "&nbsp;" = " ", "&amp;" = "&", "&lt;" = "<", "&gt;" = ">",
@@ -163,7 +160,7 @@ akronim <- c("adhb","adhk","gini","ihpb","ihk","ikjhi","ikrt","ipak","iptik",
              "supas","susenas","tpak","wisman","wisnas","wisnus","covid",
              "migas","nonmigas","ratio")
 
-# Kata yang terbukti salah di-stem pada audit kamus revisi 1
+# Nama diri yang rusak bila dilewatkan stemmer
 salah_stem <- c("pelaku","peluang","pelayanan","perasaan","pengadaan",
                 "penduduk","negeri","petani","pegawai","bersekolah",
                 "dipertahankan","memuaskan","kepuasan","kekerasan","kesiapan",
@@ -185,13 +182,11 @@ sw_satuan <- c("persen","miliar","juta","triliun","ribu","rupiah","dolar",
                "indeks","nilai","sebesar","mencapai","tercatat","dibanding",
                "dibandingkan","mengalami","sedangkan","yoy","mtm","ytd")
 
-# PENTING. Daftar stopwords-iso Bahasa Indonesia tidak simetris untuk korpus
-# ini: ia membuang "naik", "tinggi", "besar", "kecil", "tambah", "kurang"
-# tetapi MEMBIARKAN "turun", "rendah", "tumbuh". Pada korpus yang isinya
-# laporan perubahan angka, ketimpangan itu menciptakan temuan palsu -- seolah
-# BPS lebih sering melaporkan penurunan daripada kenaikan, padahal kebalikannya
-# (keluarga kata naik 7.991 vs turun 4.186 pada teks mentah).
-# Kata-kata arah dan besaran karena itu DIKEMBALIKAN dari daftar stopword.
+# Daftar stopwords-iso Bahasa Indonesia tidak simetris untuk korpus ini: ia
+# membuang "naik", "tinggi", "besar", "kecil", "tambah", "kurang" tetapi
+# membiarkan "turun", "rendah", "tumbuh". Pada korpus yang isinya laporan
+# perubahan angka, ketimpangan itu membalik kesimpulan (keluarga kata naik
+# 7.991 vs turun 4.186 pada teks mentah). Kata arah dan besaran dikembalikan.
 kata_dipertahankan <- c("naik","turun","tinggi","rendah","besar","kecil",
                         "tambah","kurang","tumbuh","kuat","lemah","cepat",
                         "lambat","baik","buruk")
@@ -238,7 +233,7 @@ kamus_stem <- tibble(
         tryCatch(as.character(katadasaR::katadasaR(w)), error = function(e) w)
       }, character(1), USE.NAMES = FALSE)
     ),
-    # Jaring pengaman: stem yang menyisakan < 4 huruf hampir selalu salah
+    # Stem yang menyisakan kurang dari empat huruf dibatalkan
     kata_dasar = if_else(str_length(kata_dasar) < 4, kata, kata_dasar)
   )
 
@@ -254,7 +249,7 @@ write_csv(tokens, "data/processed/brs_tokens.csv")
 # Ringkasan
 # =============================================================================
 
-cat("\n============= RINGKASAN PRA-PEMROSESAN (revisi 2) =============\n")
+cat("\n================= RINGKASAN PRA-PEMROSESAN =================\n")
 cat("Dokumen                 :", nrow(docs), "\n")
 cat("Token final             :", nrow(tokens), "\n")
 cat("Kosakata (asli)         :", length(vocab), "\n")
@@ -280,4 +275,3 @@ print(as.data.frame(
   filter(count(tokens, kata_dasar), kata_dasar %in% c("naik","turun","tingkat","tumbuh"))
 ))
 cat("===============================================================\n")
-

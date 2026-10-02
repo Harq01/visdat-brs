@@ -457,9 +457,10 @@ atas grafik. Berpindah tab mengubah ambang bobot sisi. *Sumber: BPS — Berita
 Resmi Statistik via WebAPI BPS, diakses 2 Oktober 2026.*
 
 Struktur yang muncul bukan kebetulan. Simpul terbesar adalah **naik** dan
-**turun**, dan keduanya terhubung ke hampir semua kelompok lain — persis
-seperti dugaan dari rasio arah tadi: kata arah adalah tulang punggung kalimat
-BRS, dan tiap subjek hanya menempelkan istilah teknisnya sendiri di sekelilingnya.
+**turun**, dan keduanya terhubung ke hampir semua kelompok lain, sejalan
+dengan apa yang terlihat pada rasio arah: kata arah adalah tulang punggung
+kalimat BRS, dan tiap subjek hanya menempelkan istilah teknisnya sendiri di
+sekelilingnya.
 
 Komunitas yang terbentuk ternyata memetakan subjek statistik tanpa pernah
 diberi tahu subjeknya. Terlihat gugus *gabah–kualitas–giling–beras* untuk
@@ -469,8 +470,8 @@ untuk perdagangan internasional. Algoritma Louvain bekerja murni dari pola
 kemunculan kata bersebelahan, namun kelompok yang dihasilkannya sejajar dengan
 taksonomi CSA pada bagian berikut. Itu petunjuk kuat bahwa **tiap subjek BRS
 punya rumus kalimatnya sendiri yang nyaris tidak berubah antar rilis** — sifat
-templatik korpus yang tadi terlihat dari rendahnya keragaman kosakata, kini
-tampak sebagai struktur.
+templatik korpus, yang semula hanya tampak sebagai rendahnya keragaman
+kosakata, kini terlihat sebagai struktur.
 
 ## Representasi kedua: matriks ketetanggaan
 
