@@ -25,6 +25,58 @@ $code-block-bg:          #f4f2ee;
 
 /*-- scss:rules --*/
 
+// ---- Bilah navigasi -------------------------------------------------------
+
+.navbar {
+  border-bottom: 1px solid $border-color;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+
+  .navbar-logo {
+    max-height: 30px;
+    width: auto;
+    margin-right: 0.7rem;
+  }
+
+  .navbar-brand {
+    font-family: $headings-font-family;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    color: $body-color;
+    padding-right: 1.6rem;
+    margin-right: 1.4rem;
+    border-right: 1px solid $border-color;
+  }
+
+  .nav-link {
+    font-family: $font-family-sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #6b7178;
+    padding: 0.3rem 0.85rem;
+    border-radius: 6px;
+
+    &:hover { color: $primary; background: rgba(0, 114, 178, 0.06); }
+
+    &.active {
+      color: $primary;
+      font-weight: 600;
+      background: rgba(0, 114, 178, 0.09);
+    }
+  }
+}
+
+.nav-footer {
+  border-top: 1px solid $border-color;
+  font-family: $font-family-sans-serif;
+  font-size: 0.78rem;
+  color: #868d94;
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+}
+
 // ---- Kepala halaman -------------------------------------------------------
 
 #title-block-header {
@@ -50,10 +102,13 @@ $code-block-bg:          #f4f2ee;
     font-family: $font-family-sans-serif;
     font-size: 0.82rem;
     color: #70767d;
-    border-top: 1px solid $border-color;
     padding-top: 0.9rem;
     margin-top: 1.2rem;
   }
+
+  // Pada halaman tanpa penulis dan tanggal, blok ini kosong dan hanya
+  // menyisakan garis yang menggantung. Disembunyikan bila tidak berisi.
+  .quarto-title-meta:empty { display: none; }
 }
 
 // ---- Judul bagian ---------------------------------------------------------
@@ -105,13 +160,49 @@ h1 + p {
 }
 
 // ---- Grafik ---------------------------------------------------------------
+// Kotak membungkus grafik beserta judulnya, sehingga tiap visualisasi terbaca
+// sebagai satu kesatuan dan terpisah jelas dari teks di sekitarnya.
 
-.plotly, .visNetwork, .html-widget {
+.cell-output-display > .html-widget,
+.cell-output-display > .plotly,
+.cell-output-display > .visNetwork {
   background: #fff;
   border: 1px solid $border-color;
   border-radius: 10px;
+  padding: 0.4rem 0.6rem 0.8rem 0.6rem;
+  margin: 1.8rem 0 0.6rem 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+// Gambar statis (ggplot) diperlakukan sama
+.cell-output-display > figure > img,
+.cell-output-display > img {
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  background: #fff;
   padding: 0.6rem;
-  margin: 1.4rem 0;
+  margin: 1.8rem 0 0.6rem 0;
+}
+
+// Keterangan gambar: dirapatkan ke kotaknya, bukan mengambang jauh di bawah
+figure > figcaption,
+.quarto-figure figcaption,
+.figure-caption {
+  font-family: $font-family-sans-serif;
+  font-size: 0.76rem;
+  color: #868d94;
+  margin-top: 0.5rem;
+  margin-bottom: 2.2rem;
+  text-align: left;
+}
+
+// Keterangan tabel
+.table-caption, caption {
+  font-family: $font-family-sans-serif;
+  font-size: 0.78rem;
+  color: #868d94;
+  text-align: left;
+  padding-bottom: 0.5rem;
 }
 
 // ---- Tab ------------------------------------------------------------------
@@ -226,7 +317,14 @@ pre code { font-size: 0.78rem; }
   .card h3                   { font-size: 1.7rem; }
   body                       { font-size: 16px; }
 
-  .html-widget { padding: 0.3rem; }
+  .navbar .navbar-brand {
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+    font-size: 1rem;
+  }
+
+  .html-widget { margin: 1.2rem 0 0.4rem 0; }
 
   // kartu angka menumpuk, bukan berdesakan empat kolom
   .quarto-layout-row { flex-direction: column; }

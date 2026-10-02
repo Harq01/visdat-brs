@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="M. Faruq Hafidzullah Erfaringga · 222313186 · 3SD2 · Politeknik Statistika STIS">
 
-<title>Bahasa Statistik Resmi</title>
+<title>Metodologi – Bahasa Statistik Resmi</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -91,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Beranda</span></a>
   </li>  
   <li class="nav-item">
@@ -107,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Hierarki</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./metodologi.html"> 
+    <a class="nav-link active" href="./metodologi.html" aria-current="page"> 
 <span class="menu-text">Metodologi</span></a>
   </li>  
 </ul>
@@ -128,33 +127,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Di halaman ini</h2>
+   
+  <ul class="collapse">
+  <li><a href="#sumber-data" id="toc-sumber-data" class="nav-link active" data-scroll-target="#sumber-data">Sumber data</a></li>
+  <li><a href="#pra-pemrosesan" id="toc-pra-pemrosesan" class="nav-link" data-scroll-target="#pra-pemrosesan">Pra-pemrosesan</a></li>
+  <li><a href="#keputusan-rancangan-visual" id="toc-keputusan-rancangan-visual" class="nav-link" data-scroll-target="#keputusan-rancangan-visual">Keputusan rancangan visual</a></li>
+  <li><a href="#keterbatasan" id="toc-keterbatasan" class="nav-link" data-scroll-target="#keterbatasan">Keterbatasan</a></li>
+  <li><a href="#perangkat" id="toc-perangkat" class="nav-link" data-scroll-target="#perangkat">Perangkat</a></li>
+  <li><a href="#penggunaan-alat-bantu-ai" id="toc-penggunaan-alat-bantu-ai" class="nav-link" data-scroll-target="#penggunaan-alat-bantu-ai">Penggunaan alat bantu AI</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bahasa Statistik Resmi</h1>
-<p class="subtitle lead">Apa yang diberitakan BPS, dan bagaimana ia menuliskannya — 1.121 Berita Resmi Statistik, 2015–2025</p>
+<h1 class="title">Metodologi</h1>
+<p class="subtitle lead">Sumber data, pra-pemrosesan, keputusan rancangan, dan keterbatasan</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Penulis</div>
-    <div class="quarto-title-meta-contents">
-             <p>M. Faruq Hafidzullah Erfaringga · 222313186 · 3SD2 · Politeknik Statistika STIS </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Diterbitkan</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2 Oktober 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -164,78 +164,45 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Setiap bulan BPS menerbitkan Berita Resmi Statistik — rilis resmi yang jadi pintu utama angka statistik nasional masuk ke ruang publik. Proyek ini tidak menganalisis angkanya, melainkan <strong>teksnya</strong>: apa yang dipilih BPS untuk diberitakan, kata apa yang dipakainya, dan bagaimana subjek-subjek itu tersusun.</p>
-</div>
-</div>
-</div>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="4">
-<div class="quarto-layout-row">
-<section id="section" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="section">1,121</h3>
-<p>Dokumen BRS, 2015–2025</p>
+<section id="sumber-data" class="level2">
+<h2 class="anchored" data-anchor-id="sumber-data">Sumber data</h2>
+<p>Berita Resmi Statistik, Badan Pusat Statistik, domain nasional (kode <code>0000</code>), tahun terbit 2015–2025, diambil melalui <a href="https://webapi.bps.go.id">WebAPI BPS</a> dengan model <code>pressrelease</code> pada 2 Oktober 2026. Seluruh 1121 dokumen yang dikembalikan API dipakai; tidak ada yang dibuang.</p>
+<p>Tiap dokumen membawa pengenal, subjek statistik, judul, abstrak, dan tanggal rilis. Analisis dilakukan atas judul dan abstrak.</p>
 </section>
-<section id="section-1" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="section-1">22</h3>
-<p>Subjek statistik (CSA v1.1)</p>
+<section id="pra-pemrosesan" class="level2">
+<h2 class="anchored" data-anchor-id="pra-pemrosesan">Pra-pemrosesan</h2>
+<p>Tahapannya berurutan: pembersihan markup, pelekatan taksonomi, <em>case folding</em>, tokenisasi, penyaringan stopword, penyaringan frekuensi, lalu stemming. Seluruhnya dapat direproduksi dari skrip di <a href="https://github.com/Harq01/visdat-brs">repositori</a>.</p>
+<p><strong>Pembersihan markup membedakan tag blok dan tag inline.</strong> Abstrak BRS disimpan sebagai HTML hasil ekspor Microsoft Word. Menghapus semua tag tanpa spasi menyambungkan kata antar paragraf; menggantinya dengan spasi membelah kata yang terpotong <code>&lt;span&gt;</code>. Keduanya ditangani terpisah: tag blok diganti spasi, tag inline dihapus.</p>
+<p><strong>Stemming memakai algoritma Nazief &amp; Andriani</strong> melalui paket <code>katadasaR</code>, dijalankan atas kosakata unik lalu digabungkan kembali ke korpus. Pendekatan ini memberi hasil identik dengan menstem seluruh token, dengan waktu komputasi jauh lebih singkat.</p>
+<p><strong>Daftar istilah terlindungi dikecualikan dari stemming.</strong> Nazief &amp; Andriani tidak mengenali nama diri, sehingga tanpa penanganan khusus <em>Bali</em> menjadi <em>bal</em>, <em>Bekasi</em> menjadi <em>bekas</em>, dan <em>ASEAN</em> menjadi <em>ase</em>. Daftar nama wilayah, negara, dan akronim disusun untuk mengatasinya.</p>
+<p><strong>Kata arah dikembalikan dari daftar stopword.</strong> Daftar <code>stopwords-iso</code> Bahasa Indonesia membuang <em>naik</em>, <em>tinggi</em>, <em>besar</em>, dan <em>kecil</em>, tetapi membiarkan <em>turun</em>, <em>rendah</em>, dan <em>tumbuh</em>. Pada korpus yang isinya laporan perubahan angka, ketimpangan itu membalik kesimpulan: tanpa koreksi, data seolah menunjukkan BPS lebih sering melaporkan penurunan. Lima belas kata arah dan besaran karena itu dikembalikan secara eksplisit.</p>
+<p><strong>Ambang frekuensi lima kemunculan</strong> membuang salah ketik pada sumber seperti <em>febuari</em> dan <em>okober</em>, dengan konsekuensi kata langka yang sahih ikut terbuang.</p>
 </section>
-<section id="section-2" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="section-2">89.5%</h3>
-<p>Berasal dari domain Ekonomi</p>
+<section id="keputusan-rancangan-visual" class="level2">
+<h2 class="anchored" data-anchor-id="keputusan-rancangan-visual">Keputusan rancangan visual</h2>
+<p><strong>Diagram batang menggantikan word cloud.</strong> Posisi pada skala bersama adalah saluran persepsi paling akurat dalam hierarki Cleveland–McGill; luas area dan ukuran huruf termasuk yang paling tidak akurat.</p>
+<p><strong>Panel kecil untuk TF-IDF.</strong> Skor TF-IDF antar subjek tidak sebanding besarannya, sehingga satu sumbu bersama akan menyesatkan. Panel terpisah juga memungkinkan tiap subjek menampilkan kata yang berbeda.</p>
+<p><strong>Palet Okabe-Ito untuk kategori, skala satu rona biru untuk nilai berurutan.</strong> Keduanya tetap terbaca pada deuteranopia, protanopia, dan tritanopia. Skala satu rona dipilih atas skala pelangi karena urutannya tetap jelas tanpa bergantung pada pembedaan rona.</p>
+<p><strong>Ukuran dan warna mengkodekan variabel berbeda</strong> pada sunburst dan treemap: jumlah dokumen dan rata-rata panjang dokumen.</p>
 </section>
-<section id="section-3" class="level3 card quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<h3 class="anchored" data-anchor-id="section-3">1.69×</h3>
-<p>Kabar naik dibanding turun</p>
+<section id="keterbatasan" class="level2">
+<h2 class="anchored" data-anchor-id="keterbatasan">Keterbatasan</h2>
+<p><strong>Artefak markup.</strong> Pembersihan menekan penyambungan dan pembelahan kata, tetapi sisa kesalahan kecil masih mungkin ada.</p>
+<p><strong>Salah ketik pada sumber.</strong> Korpus mengandung salah ketik asli dari BPS. Penyaringan frekuensi membuang sebagian besarnya, dengan konsekuensi kata langka yang sahih ikut terbuang.</p>
+<p><strong>Keterbatasan stemmer.</strong> Daftar istilah terlindungi tidak dijamin lengkap.</p>
+<p><strong>Dokumen tanpa subjek.</strong> Sebelas dokumen tidak membawa <code>subj_id</code> dari API dan diberi label <em>Tidak Berkategori</em> alih-alih dibuang, agar jumlah korpus tetap utuh.</p>
+<p><strong>Daftar stopword tidak netral.</strong> Daftar stopword disusun untuk teks umum, bukan untuk laporan statistik. Pemakaiannya tanpa pemeriksaan adalah sumber kesalahan yang mudah luput, sebagaimana terlihat pada kasus kata arah di atas.</p>
+<p><strong>Cakupan.</strong> Analisis terbatas pada judul dan abstrak, bukan isi penuh PDF rilis. Kesimpulan berlaku untuk apa yang BPS ringkaskan di muka, bukan untuk keseluruhan isi tiap rilis.</p>
+<p><strong>Kaitan dengan peristiwa luar.</strong> Hubungan antara rasio arah dan siklus ekonomi bersifat deskriptif. Analisis ini tidak menguji sebab-akibat dan tidak menyertakan variabel makroekonomi sebagai pembanding.</p>
 </section>
-</div>
-</div>
-<section id="tiga-temuan" class="level1">
-<h1>Tiga temuan</h1>
-<p><strong>Hampir sembilan dari sepuluh BRS adalah statistik ekonomi.</strong> Statistik demografi dan sosial — kemiskinan, ketenagakerjaan, gender, pendidikan — hanya mengisi sebagian kecil. Apa yang rutin dikomunikasikan BPS ke publik jauh lebih sempit daripada apa yang diukurnya.</p>
-<p><strong>BPS menuliskan kenaikan hampir dua kali lebih sering daripada penurunan.</strong> Rasionya 1.69 banding satu, dan rasio itu bergerak mengikuti siklus ekonomi: terendah pada 2020, tertinggi pada 2022.</p>
-<p><strong>Bahasa BRS adalah bahasa template.</strong> Dari ratusan ribu kata, kosakata uniknya hanya ratusan. Kalimat-kalimatnya berulang nyaris identik dari bulan ke bulan, yang membuat frekuensi kata mentah nyaris tak berguna dan menuntut pembobotan TF-IDF untuk melihat apa yang sebenarnya membedakan tiap subjek.</p>
+<section id="perangkat" class="level2">
+<h2 class="anchored" data-anchor-id="perangkat">Perangkat</h2>
+<p>R dengan <code>dplyr</code>, <code>stringr</code>, <code>tidytext</code>, <code>stopwords</code>, <code>katadasaR</code>, dan <code>igraph</code> untuk pengolahan; <code>plotly</code>, <code>ggplot2</code>, <code>visNetwork</code>, <code>DT</code>, dan <code>crosstalk</code> untuk visualisasi; Quarto untuk penyusunan laman; GitHub Pages untuk <em>deployment</em>.</p>
 </section>
-<section id="susunan-proyek" class="level1">
-<h1>Susunan proyek</h1>
-<p>Visualisasi dibagi menjadi tiga topik, masing-masing pada halamannya sendiri.</p>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="3">
-<div class="quarto-layout-row">
-<section id="teks" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<h4 class="anchored" data-anchor-id="teks"><a href="./teks.html">Teks</a></h4>
-<p>Frekuensi kata, kekhasan subjek lewat TF-IDF, arah perubahan yang dilaporkan sepanjang sebelas tahun, dan penelusuran seluruh dokumen.</p>
-</section>
-<section id="jaringan" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<h4 class="anchored" data-anchor-id="jaringan"><a href="./jaringan.html">Jaringan</a></h4>
-<p>Ko-okurensi kata sebagai graf berbobot dengan sentralitas dan komunitas, plus matriks ketetanggaan sebagai representasi kedua.</p>
-</section>
-<section id="hierarki" class="level4 card quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<h4 class="anchored" data-anchor-id="hierarki"><a href="./hierarki.html">Hierarki</a></h4>
-<p>Taksonomi CSA empat tingkat — Domain, Divisi, Subjek, Dokumen — dalam bentuk sunburst dan treemap.</p>
-</section>
-</div>
-</div>
-<p>Catatan sumber data, keputusan pra-pemrosesan, dan keterbatasan ada di halaman <a href="./metodologi.html">Metodologi</a>.</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Data dan kode terbuka.</strong> Seluruh skrip pengambilan data, pra-pemrosesan, dan analisis tersedia di <a href="https://github.com/Harq01/visdat-brs">repositori GitHub</a> beserta data terolahnya, sehingga hasil di situs ini dapat direproduksi penuh.</p>
-</div>
-</div>
-</div>
+<section id="penggunaan-alat-bantu-ai" class="level2">
+<h2 class="anchored" data-anchor-id="penggunaan-alat-bantu-ai">Penggunaan alat bantu AI</h2>
+<p>Sesuai ketentuan integritas akademik pada soal, saya mendeklarasikan penggunaan alat bantu berbasis AI. Saya memakai Claude (Anthropic) sebagai alat bantu dalam penulisan skrip R, perancangan struktur dasbor, dan pemeriksaan kualitas pra-pemrosesan.</p>
+<p>Saya menentukan sendiri tema dan ruang lingkup proyek, menjalankan seluruh pipeline pengolahan, memeriksa dan memvalidasi setiap keluaran pada tiap tahap, serta menetapkan arah rancangan visual dan kedalaman interpretasi. Seluruh isi proyek, termasuk temuan dan pembahasannya, menjadi tanggung jawab penuh saya.</p>
 
 
 </section>

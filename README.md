@@ -11,13 +11,13 @@ bagaimana subjek-subjeknya tersusun.
 
 UAS Visualisasi Data dan Informasi (K203407), Program Studi Komputasi
 Statistik, Politeknik Statistika STIS.
-M. Faruq Hafidzullah Erfaringga — 222313186.
+M. Faruq Hafidzullah Erfaringga — 222313186 — 3SD2.
 
 ---
 
 ## Topik visualisasi
 
-Memenuhi tiga dari enam topik pada soal:
+Saya mengambil tiga dari enam topik yang ditawarkan soal:
 
 | Topik | Visualisasi |
 |---|---|
@@ -43,15 +43,15 @@ Memenuhi tiga dari enam topik pada soal:
 - **Sumber:** Berita Resmi Statistik, BPS, domain nasional (kode `0000`),
   tahun terbit 2015–2025.
 - **Cara akses:** [WebAPI BPS](https://webapi.bps.go.id), model
-  `pressrelease`, diakses 2 Oktober 2026.
+  `pressrelease`, saya akses pada 2 Oktober 2026.
 - **Jumlah:** 1.121 dokumen, 96.611 token setelah pra-pemrosesan, 764
   kosakata, 682 kata dasar.
-- Seluruh dokumen yang dikembalikan API dipakai; tidak ada yang dibuang.
+- Saya memakai seluruh dokumen yang dikembalikan API; tidak ada yang dibuang.
 
-Taksonomi hierarki mengikuti *Classification of Statistical Activities* (CSA)
-v1.1 yang dikelola UNECE dan dipakai BPS. Nilai `subj_id` pada WebAPI
-mengikuti urutan kode CSA, sehingga hierarki direkonstruksi dari data, bukan
-dikelompokkan sendiri.
+Taksonomi hierarkinya mengikuti *Classification of Statistical Activities*
+(CSA) v1.1 yang dikelola UNECE dan dipakai BPS. Nilai `subj_id` pada WebAPI
+ternyata mengikuti urutan kode CSA, sehingga hierarkinya saya rekonstruksi
+dari data, bukan saya kelompokkan sendiri.
 
 ## Struktur repositori
 
@@ -65,7 +65,12 @@ visdat-brs/
 │   ├── raw/                # korpus mentah apa adanya dari API
 │   ├── processed/          # dokumen bersih, token, kamus stemming
 │   └── viz/                # data siap pakai per visualisasi
-├── index.qmd               # dasbor
+├── index.qmd               # beranda: ringkasan dan tiga temuan
+├── teks.qmd                # halaman topik data teks
+├── jaringan.qmd            # halaman topik data berjaring
+├── hierarki.qmd            # halaman topik data berhierarki
+├── metodologi.qmd          # sumber data, pra-pemrosesan, keterbatasan
+├── _common.R               # paket, palet, pemuatan data, tema grafik
 ├── custom.scss             # tema tampilan
 ├── _quarto.yml
 └── docs/                   # hasil render, dilayani GitHub Pages
@@ -101,26 +106,26 @@ source("R/03_analysis.R")     # menulis data/viz/
 quarto render                 # menulis docs/
 ```
 
-Token tidak pernah ditulis di dalam skrip dan `.Renviron` diabaikan oleh
+Token tidak pernah saya tulis di dalam skrip, dan `.Renviron` diabaikan oleh
 `.gitignore`.
 
 ## Catatan pra-pemrosesan
 
-Beberapa keputusan yang memengaruhi hasil dan sengaja didokumentasikan:
+Beberapa keputusan yang memengaruhi hasil dan sengaja saya dokumentasikan:
 
 - **Pembersihan HTML membedakan tag blok dan tag inline.** Abstrak BRS adalah
   hasil ekspor Microsoft Word. Menghapus semua tag tanpa spasi menyambungkan
   kata antar paragraf; menggantinya dengan spasi membelah kata yang terpotong
-  `<span>`. Keduanya ditangani terpisah.
+  `<span>`. Saya tangani keduanya secara terpisah.
 - **Istilah terlindungi.** Algoritma stemming Nazief & Andriani tidak
   mengenali nama diri (*Bali* → *bal*, *ASEAN* → *ase*). Daftar nama wilayah,
-  negara, dan akronim di `data/processed/istilah_terlindungi.csv`
-  dikecualikan dari stemming.
-- **Kata arah dikembalikan dari daftar stopword.** Daftar `stopwords-iso`
+  negara, dan akronim di `data/processed/istilah_terlindungi.csv` saya
+  kecualikan dari stemming.
+- **Kata arah saya kembalikan dari daftar stopword.** Daftar `stopwords-iso`
   Bahasa Indonesia membuang *naik*, *tinggi*, *besar*, *kecil* tetapi
   membiarkan *turun*, *rendah*, *tumbuh*. Ketimpangan itu membalik kesimpulan
   pada korpus yang isinya laporan perubahan angka, sehingga 15 kata arah dan
-  besaran dikembalikan secara eksplisit.
+  besaran saya kembalikan secara eksplisit.
 - **Ambang frekuensi lima.** Membuang salah ketik pada sumber (*febuari*,
   *okober*) dengan konsekuensi kata langka yang sahih ikut terbuang.
 
@@ -131,19 +136,24 @@ Beberapa keputusan yang memengaruhi hasil dan sengaja didokumentasikan:
   dan ukuran huruf termasuk paling tidak akurat.
 - **Panel kecil untuk TF-IDF.** Skor TF-IDF antar subjek tidak sebanding
   besarannya, sehingga satu sumbu bersama akan menyesatkan.
-- **Palet Okabe-Ito** untuk kategori dan **Viridis** untuk skala berurutan,
-  keduanya tetap terbaca pada deuteranopia, protanopia, dan tritanopia.
+- **Palet Okabe-Ito** untuk kategori dan **skala satu rona biru** untuk nilai
+  berurutan. Satu rona menjaga urutan tetap terbaca pada deuteranopia,
+  protanopia, dan tritanopia, sekaligus menyatu dengan tampilan halaman.
 - **Ukuran dan warna mengkodekan variabel berbeda** pada sunburst dan treemap:
   jumlah dokumen dan rata-rata panjang dokumen.
 
 ## Penggunaan alat bantu AI
 
-Sesuai ketentuan integritas akademik pada soal, penggunaan alat bantu berbasis
-AI dideklarasikan. Claude (Anthropic) dipakai sebagai alat bantu untuk
-perancangan struktur kode, penulisan skrip R, dan audit kualitas
-pra-pemrosesan. Seluruh keputusan analitis, pemilihan tema, interpretasi
-temuan, dan verifikasi hasil dilakukan dan dipertanggungjawabkan oleh penulis.
-Rincian lebih lanjut ada pada bagian Metodologi makalah.
+Sesuai ketentuan integritas akademik pada soal, saya mendeklarasikan
+penggunaan alat bantu berbasis AI. Saya memakai Claude (Anthropic) sebagai
+alat bantu dalam penulisan skrip R, perancangan struktur dasbor, dan
+pemeriksaan kualitas pra-pemrosesan.
+
+Saya menentukan sendiri tema dan ruang lingkup proyek, menjalankan seluruh
+pipeline pengolahan, memeriksa dan memvalidasi setiap keluaran pada tiap
+tahap, serta menetapkan arah rancangan visual dan kedalaman interpretasi.
+Seluruh isi proyek, termasuk temuan dan pembahasannya, menjadi tanggung jawab
+penuh saya.
 
 ## Lisensi
 

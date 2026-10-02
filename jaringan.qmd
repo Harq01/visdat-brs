@@ -1,0 +1,117 @@
+---
+title: "Jaringan ko-okurensi"
+subtitle: "Kata apa yang muncul bersama, dan kelompok apa yang terbentuk darinya"
+---
+
+```{r}
+#| include: false
+source("_common.R")
+```
+
+Dua kata dihubungkan bila keduanya muncul bersebelahan dalam satu dokumen
+setelah penyaringan kata fungsi. Bobot sisi adalah banyaknya kemunculan
+pasangan itu di seluruh korpus. Ukuran simpul mengkodekan **kekuatan**
+(jumlah bobot sisi yang melekat), warna mengkodekan **komunitas** hasil
+algoritma Louvain.
+
+## Graf node-link
+
+::: {.panel-tabset}
+
+## Ambang 100
+
+```{r}
+#| label: grafik-jaringan-100
+jaringan(100)
+```
+
+`r sum(sisi$bobot >= 100)` sisi, `r nrow(filter(simpul, ambang == 100))` simpul.
+
+## Ambang 50
+
+```{r}
+#| label: grafik-jaringan-50
+jaringan(50)
+```
+
+`r sum(sisi$bobot >= 50)` sisi, `r nrow(filter(simpul, ambang == 50))` simpul — lebih padat, struktur tepi lebih terlihat.
+
+## Ambang 200
+
+```{r}
+#| label: grafik-jaringan-200
+jaringan(200)
+```
+
+`r sum(sisi$bobot >= 200)` sisi, `r nrow(filter(simpul, ambang == 200))` simpul — hanya pasangan paling baku yang tersisa.
+
+:::
+
+Klik satu simpul untuk menyorot tetangganya, atau pakai kotak pencarian di
+atas grafik. Berpindah tab mengubah ambang bobot sisi. *Sumber: BPS — Berita
+Resmi Statistik via WebAPI BPS, diakses 2 Oktober 2026.*
+
+Struktur yang muncul bukan kebetulan. Simpul terbesar adalah **naik** dan
+**turun**, dan keduanya terhubung ke hampir semua kelompok lain, sejalan
+dengan apa yang terlihat pada rasio arah: kata arah adalah tulang punggung
+kalimat BRS, dan tiap subjek hanya menempelkan istilah teknisnya sendiri di
+sekelilingnya.
+
+Komunitas yang terbentuk ternyata memetakan subjek statistik tanpa pernah
+diberi tahu subjeknya. Terlihat gugus *gabah–kualitas–giling–beras* untuk
+survei harga produsen padi, *kunjung–wisman* untuk pariwisata,
+*upah–nominal–buruh–tani* untuk biaya tenaga kerja, dan *ekspor–nonmigas–impor*
+untuk perdagangan internasional. Algoritma Louvain bekerja murni dari pola
+kemunculan kata bersebelahan, namun kelompok yang dihasilkannya sejajar dengan
+taksonomi CSA pada [halaman Hierarki](hierarki.qmd). Itu petunjuk kuat bahwa
+**tiap subjek BRS punya rumus kalimatnya sendiri yang nyaris tidak berubah
+antar rilis** — sifat templatik korpus, yang semula hanya tampak sebagai
+rendahnya keragaman kosakata, kini terlihat sebagai struktur.
+
+## Representasi kedua
+
+```{r}
+#| label: grafik-matriks
+#| fig-height: 8
+
+urut <- simpul |>
+  filter(ambang == 100) |>
+  slice_max(kekuatan, n = 40, with_ties = FALSE) |>
+  arrange(komunitas, desc(kekuatan)) |>
+  pull(kata)
+
+m <- expand_grid(dari = urut, ke = urut) |>
+  left_join(matriks, by = c("dari", "ke")) |>
+  mutate(bobot = replace_na(bobot, 0),
+         dari = factor(dari, levels = urut),
+         ke   = factor(ke,   levels = rev(urut)))
+
+plot_ly(
+  m, x = ~dari, y = ~ke, z = ~bobot, type = "heatmap",
+  colorscale = BIRU_SKALA, xgap = 1, ygap = 1,
+  hovertemplate = "%{y} — %{x}<br>Bobot: %{z}<extra></extra>",
+  colorbar = list(title = list(text = "Bobot", font = list(size = 11)),
+                  len = 0.55, thickness = 12, outlinewidth = 0,
+                  tickfont = list(size = 10, color = REDUP))
+) |>
+  layout(
+    title = judul("Matriks ketetanggaan",
+                  "40 kata berkekuatan tertinggi, diurutkan menurut komunitas"),
+    xaxis = list(title = "", tickangle = -60, tickfont = list(size = 10),
+                 showgrid = FALSE),
+    yaxis = list(title = "", tickfont = list(size = 10), showgrid = FALSE)
+  ) |>
+  rapikan()
+```
+
+Baris dan kolom diurutkan menurut komunitas, sehingga blok pekat di sepanjang
+diagonal menandai kelompok kata yang saling terikat. Matriks tidak menderita
+tumpang tindih simpul seperti grafik node-link, sehingga pasangan lemah tetap
+terbaca — itu sebabnya dua representasi ini saling melengkapi.
+
+Blok diagonal yang rapi mengonfirmasi apa yang terlihat di grafik jaringan:
+kata-kata BRS mengelompok ketat per subjek dan jarang menyeberang. Dua baris
+yang justru **tidak** membentuk blok adalah *naik* dan *turun* — keduanya
+berwarna di hampir seluruh kolom. Itu gambaran paling ringkas dari temuan
+proyek ini: kosakata teknis BPS terpisah-pisah menurut subjek, tetapi kata
+arah dipakai bersama oleh semuanya.

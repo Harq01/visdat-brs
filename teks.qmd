@@ -1,0 +1,276 @@
+---
+title: "Teks"
+subtitle: "Kata apa yang dipakai BPS, dan apa yang membedakan tiap subjek"
+---
+
+```{r}
+#| include: false
+source("_common.R")
+```
+
+## Frekuensi kata
+
+```{r}
+#| label: grafik-frekuensi
+#| fig-height: 7
+
+top_kata <- freq_kata |>
+  group_by(kata_dasar) |>
+  summarise(n = sum(n), .groups = "drop") |>
+  slice_max(n, n = 25, with_ties = FALSE) |>
+  arrange(n)
+
+plot_ly(
+  top_kata,
+  x = ~n, y = ~factor(kata_dasar, levels = kata_dasar),
+  type = "bar", orientation = "h",
+  marker = list(color = BIRU, line = list(color = "#15536f", width = 0.5)),
+  hovertemplate = "<b>%{y}</b><br>%{x:,} kemunculan<extra></extra>"
+) |>
+  layout(
+    title = judul("Kata yang paling sering muncul",
+                  "25 kata dasar teratas di seluruh korpus, 2015–2025"),
+    xaxis = list(title = "Jumlah kemunculan"),
+    yaxis = list(title = "")
+  ) |>
+  rapikan()
+```
+
+Diagram batang dipilih di sini, bukan *word cloud*. Keduanya mengkodekan
+besaran yang sama, tetapi batang memakai **posisi dan panjang**, sedangkan
+awan kata memakai **luas area dan ukuran huruf**. Dalam hierarki ketepatan
+persepsi Cleveland–McGill, posisi pada skala bersama adalah saluran paling
+akurat dan luas area termasuk yang paling tidak akurat. Awan kata juga
+menyulitkan pembandingan dua kata yang berdekatan nilainya, dan panjang kata
+ikut memengaruhi kesan besarnya.
+
+Yang muncul di puncak bukan istilah statistik, melainkan kata arah: **naik**
+dan **turun**. Itu petunjuk pertama bahwa BRS pada dasarnya adalah laporan
+perubahan — setiap rilis membandingkan angka sekarang dengan angka
+sebelumnya, dan kerangka kalimatnya berulang.
+
+## Kekhasan tiap subjek
+
+```{r}
+#| label: grafik-tfidf
+#| fig-width: 11
+#| fig-height: 9
+
+subjek_besar <- indeks |>
+  count(subjek, sort = TRUE) |>
+  slice_head(n = 9) |>
+  pull(subjek)
+
+dat <- tfidf |>
+  filter(subjek %in% subjek_besar) |>
+  group_by(subjek) |>
+  slice_max(tf_idf, n = 8, with_ties = FALSE) |>
+  ungroup() |>
+  mutate(
+    panel = str_trunc(subjek, 30),
+    panel = factor(panel, levels = str_trunc(subjek_besar, 30)),
+    kata  = reorder_within(kata_dasar, tf_idf, panel)
+  )
+
+ggplot(dat, aes(x = tf_idf, y = kata, fill = panel)) +
+  geom_col(show.legend = FALSE, width = 0.7) +
+  scale_y_reordered() +
+  scale_fill_manual(values = rep(PAL_KOMUNITAS, length.out = 9)) +
+  scale_x_continuous(expand = expansion(mult = c(0, 0.1))) +
+  facet_wrap(~panel, scales = "free", ncol = 3) +
+  labs(
+    title = "Kata paling khas per subjek statistik",
+    subtitle = "Delapan kata dengan skor TF-IDF tertinggi di tiap subjek",
+    x = "Skor TF-IDF", y = NULL, caption = SUMBER
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    text          = element_text(colour = TINTA),
+    plot.title    = element_text(family = "serif", face = "bold", size = 18,
+                                 margin = margin(b = 3)),
+    plot.subtitle = element_text(colour = REDUP, size = 11,
+                                 margin = margin(b = 16)),
+    plot.caption  = element_text(colour = "#8c9298", size = 8, hjust = 0,
+                                 margin = margin(t = 16)),
+    strip.text    = element_text(face = "bold", size = 10.5, hjust = 0,
+                                 colour = "#2b3137", margin = margin(b = 6)),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor   = element_blank(),
+    panel.grid.major.x = element_line(colour = GARIS, linewidth = 0.4),
+    panel.spacing      = unit(1.3, "lines"),
+    axis.text.y        = element_text(size = 10, colour = "#3d444b"),
+    axis.text.x        = element_text(size = 9, colour = REDUP),
+    axis.title.x       = element_text(size = 10, colour = REDUP,
+                                      margin = margin(t = 8)),
+    plot.background    = element_rect(fill = LATAR, colour = NA),
+    panel.background   = element_rect(fill = LATAR, colour = NA)
+  )
+```
+
+TF-IDF memberi bobot tinggi pada kata yang sering muncul di satu subjek tetapi
+jarang di subjek lain. Tiap subjek diberi panel sendiri — bukan satu diagram
+gabungan — karena yang ingin dibandingkan adalah *peringkat di dalam* subjek,
+bukan besaran antar subjek. Skor TF-IDF antar subjek pun tidak sebanding
+besarannya, sehingga menumpuknya dalam satu sumbu justru menyesatkan. Panel
+kecil juga membuat sumbu-y tiap subjek bisa berisi kata yang berbeda, yang
+mustahil pada satu diagram tunggal.
+
+Hasilnya memperlihatkan sesuatu yang tidak terlihat pada frekuensi mentah:
+tiap subjek punya kosakata teknisnya sendiri yang nyaris tidak dipakai subjek
+lain. Pariwisata hidup di *wisman*, *penghunian*, dan *bintang*; Pertanian di
+*hektare*, *panen*, dan *pipilan* — satuan dan istilah teknis pengukuran padi.
+Kemiskinan dikenali dari *gini* dan *garis*, dua konsep pengukuran, bukan dari
+kata bermuatan emosi seperti "miskin" atau "sulit". Pola yang sama berulang di
+seluruh panel: **yang membedakan subjek BPS satu sama lain adalah alat ukurnya,
+bukan pokok persoalannya.**
+
+## Arah yang dilaporkan
+
+```{r}
+#| label: grafik-arah
+#| fig-height: 5
+
+arah_thn <- arah |>
+  group_by(tahun, arah) |>
+  summarise(n = sum(n), .groups = "drop")
+
+plot_ly(
+  arah_thn, x = ~tahun, y = ~n, color = ~arah,
+  colors = c("Naik" = HIJAU, "Turun" = ORANYE),
+  type = "scatter", mode = "lines+markers",
+  line = list(width = 2.6), marker = list(size = 7),
+  hovertemplate = "<b>%{fullData.name}</b><br>%{x}: %{y:,} kata<extra></extra>"
+) |>
+  layout(
+    title = judul("Kata arah perubahan per tahun terbit",
+                  "Jumlah kemunculan keluarga kata kenaikan dan penurunan"),
+    xaxis = list(title = "Tahun terbit", dtick = 1),
+    yaxis = list(title = "Jumlah kemunculan kata"),
+    hovermode = "x unified",
+    legend = list(orientation = "h", x = 0, y = 1.04, font = list(size = 12))
+  ) |>
+  rapikan()
+```
+
+Garis "Naik" berada di atas "Turun" di sepanjang periode, tetapi jaraknya
+tidak tetap. Jarak itulah yang informatif, dan lebih mudah dibaca bila
+dijadikan rasio.
+
+```{r}
+#| label: grafik-rasio
+#| fig-height: 5
+
+rasio_thn <- arah |>
+  group_by(tahun, arah) |>
+  summarise(n = sum(n), .groups = "drop") |>
+  pivot_wider(names_from = arah, values_from = n) |>
+  mutate(rasio = Naik / Turun)
+
+rata <- mean(rasio_thn$rasio)
+
+plot_ly(rasio_thn, x = ~tahun, y = ~rasio, type = "scatter",
+        mode = "lines+markers",
+        line = list(color = BIRU, width = 2.8, shape = "spline"),
+        marker = list(size = 8, color = BIRU),
+        hovertemplate = "<b>%{x}</b><br>Rasio %{y:.2f} : 1<extra></extra>") |>
+  add_segments(x = min(rasio_thn$tahun), xend = max(rasio_thn$tahun),
+               y = rata, yend = rata,
+               line = list(color = "#b9b3a8", dash = "dot", width = 1.2),
+               showlegend = FALSE, hoverinfo = "skip") |>
+  layout(
+    title = judul("Rasio kata kenaikan terhadap kata penurunan",
+                  "Nilai di atas satu berarti kenaikan lebih sering dilaporkan. Garis putus-putus = rata-rata periode"),
+    xaxis = list(title = "Tahun terbit", dtick = 1),
+    yaxis = list(title = "Rasio naik : turun"),
+    showlegend = FALSE
+  ) |>
+  rapikan() |>
+  add_annotations(
+    x = c(2020, 2022),
+    y = c(rasio_thn$rasio[rasio_thn$tahun == 2020],
+          rasio_thn$rasio[rasio_thn$tahun == 2022]),
+    text = c("<b>2020</b> terendah", "<b>2022</b> tertinggi"),
+    showarrow = TRUE, arrowhead = 0, arrowcolor = "#b9b3a8",
+    ax = c(0, 0), ay = c(34, -30),
+    font = list(family = SANS, size = 11.5, color = c(ORANYE, HIJAU))
+  )
+```
+
+Rasio ini berperilaku seperti indeks sentimen, meski BPS tidak merancangnya
+demikian. Ada dua lembah dan dua puncak. Lembah pertama di 2015–2016
+bertepatan dengan periode pelemahan harga komoditas dan pertumbuhan ekonomi
+Indonesia yang saat itu terendah sejak 2009. Lembah kedua, **titik terendah
+seluruh rangkaian, jatuh pada 2020** — rasionya nyaris satu banding satu,
+artinya BPS hampir sama seringnya melaporkan penurunan dan kenaikan. Puncaknya
+muncul di 2022 pada 2,73 : 1, saat pemulihan pascapandemi berjalan.
+
+Perlu ditegaskan: ini **bukan** menunjukkan BPS memilih nada. Kata arah di BRS
+melekat pada angka yang dilaporkan, sehingga rasio ini memantulkan keadaan
+ekonomi yang diukur, bukan sikap penulisnya. Yang menarik justru karena itu —
+teks rilis statistik ternyata membawa jejak siklus ekonomi yang bisa dilacak
+tanpa menyentuh satu pun angkanya.
+
+## Krisis yang tidak disebut namanya
+
+```{r}
+#| label: tabel-pandemi
+
+tibble::tibble(
+  Kata = c("covid", "pandemi", "ppkm", "pembatasan"),
+  `2020` = c(6, 1, 0, 0),
+  `2021` = c(10, 0, 0, 0),
+  `2022` = c(10, 0, 0, 0),
+  `2023` = c(10, 4, 1, 1)
+) |>
+  knitr::kable(align = "lrrrr",
+               caption = "Kemunculan kosakata pandemi di korpus BRS. Sumber: BPS.")
+```
+
+Sepanjang 2020 BPS menerbitkan 97 Berita Resmi Statistik. Di seluruh teks itu,
+kata *pandemi* muncul **satu kali** dan *covid* enam kali. Bandingkan dengan
+grafik di atas: pada tahun yang sama, rasio arah jatuh ke titik terendah
+sebelas tahun.
+
+Jejak pandemi di korpus ini ada pada **angkanya, bukan pada kosakatanya**. BPS
+tidak menamai krisis; ia melaporkan ekspor yang turun, kunjungan wisatawan
+yang anjlok, dan pengangguran yang naik. Ini sifat bahasa statistik resmi yang
+jarang disadari: registernya menahan diri dari penamaan peristiwa, dan
+menyerahkan seluruh beban makna kepada angka. Bagi pembaca umum, itu berarti
+rilis BPS menuntut konteks dari luar untuk dipahami — sebuah keterbatasan
+komunikasi, bukan keterbatasan data.
+
+## Telusuri dokumennya
+
+```{r}
+#| label: tabel-dokumen
+
+sd <- SharedData$new(
+  indeks |>
+    select(Tanggal = tanggal, Domain = domain, Subjek = subjek,
+           Judul = judul, Kata = n_kata) |>
+    mutate(Subjek = str_trunc(Subjek, 40))
+)
+
+bscols(
+  widths = c(3, 9),
+  list(
+    filter_select("f_dom", "Domain CSA", sd, ~Domain),
+    filter_slider("f_thn", "Tahun terbit", sd,
+                  ~as.integer(format(Tanggal, "%Y")), step = 1, sep = "")
+  ),
+  datatable(
+    sd, rownames = FALSE, extensions = "Scroller",
+    options = list(
+      deferRender = TRUE, scrollY = 420, scroller = TRUE,
+      dom = "ft", columnDefs = list(list(width = "48%", targets = 3)),
+      language = list(search = "Cari kata kunci:",
+                      info = "", infoEmpty = "", infoFiltered = "")
+    ),
+    class = "compact stripe hover"
+  )
+)
+```
+
+Kotak pencarian menyaring seluruh 1.121 judul secara langsung, dan penyaring
+di kiri membatasi domain serta periode terbit. *Sumber: BPS — Berita Resmi
+Statistik via WebAPI BPS, diakses 2 Oktober 2026.*

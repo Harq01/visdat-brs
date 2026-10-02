@@ -1,51 +1,135 @@
 [
   {
+    "objectID": "teks.html",
+    "href": "teks.html",
+    "title": "Teks",
+    "section": "",
+    "text": "Diagram batang dipilih di sini, bukan word cloud. Keduanya mengkodekan besaran yang sama, tetapi batang memakai posisi dan panjang, sedangkan awan kata memakai luas area dan ukuran huruf. Dalam hierarki ketepatan persepsi Cleveland–McGill, posisi pada skala bersama adalah saluran paling akurat dan luas area termasuk yang paling tidak akurat. Awan kata juga menyulitkan pembandingan dua kata yang berdekatan nilainya, dan panjang kata ikut memengaruhi kesan besarnya.\nYang muncul di puncak bukan istilah statistik, melainkan kata arah: naik dan turun. Itu petunjuk pertama bahwa BRS pada dasarnya adalah laporan perubahan — setiap rilis membandingkan angka sekarang dengan angka sebelumnya, dan kerangka kalimatnya berulang."
+  },
+  {
+    "objectID": "teks.html#frekuensi-kata",
+    "href": "teks.html#frekuensi-kata",
+    "title": "Teks",
+    "section": "",
+    "text": "Diagram batang dipilih di sini, bukan word cloud. Keduanya mengkodekan besaran yang sama, tetapi batang memakai posisi dan panjang, sedangkan awan kata memakai luas area dan ukuran huruf. Dalam hierarki ketepatan persepsi Cleveland–McGill, posisi pada skala bersama adalah saluran paling akurat dan luas area termasuk yang paling tidak akurat. Awan kata juga menyulitkan pembandingan dua kata yang berdekatan nilainya, dan panjang kata ikut memengaruhi kesan besarnya.\nYang muncul di puncak bukan istilah statistik, melainkan kata arah: naik dan turun. Itu petunjuk pertama bahwa BRS pada dasarnya adalah laporan perubahan — setiap rilis membandingkan angka sekarang dengan angka sebelumnya, dan kerangka kalimatnya berulang."
+  },
+  {
+    "objectID": "teks.html#kekhasan-tiap-subjek",
+    "href": "teks.html#kekhasan-tiap-subjek",
+    "title": "Teks",
+    "section": "Kekhasan tiap subjek",
+    "text": "Kekhasan tiap subjek\n\n\n\n\n\n\n\n\n\nTF-IDF memberi bobot tinggi pada kata yang sering muncul di satu subjek tetapi jarang di subjek lain. Tiap subjek diberi panel sendiri — bukan satu diagram gabungan — karena yang ingin dibandingkan adalah peringkat di dalam subjek, bukan besaran antar subjek. Skor TF-IDF antar subjek pun tidak sebanding besarannya, sehingga menumpuknya dalam satu sumbu justru menyesatkan. Panel kecil juga membuat sumbu-y tiap subjek bisa berisi kata yang berbeda, yang mustahil pada satu diagram tunggal.\nHasilnya memperlihatkan sesuatu yang tidak terlihat pada frekuensi mentah: tiap subjek punya kosakata teknisnya sendiri yang nyaris tidak dipakai subjek lain. Pariwisata hidup di wisman, penghunian, dan bintang; Pertanian di hektare, panen, dan pipilan — satuan dan istilah teknis pengukuran padi. Kemiskinan dikenali dari gini dan garis, dua konsep pengukuran, bukan dari kata bermuatan emosi seperti “miskin” atau “sulit”. Pola yang sama berulang di seluruh panel: yang membedakan subjek BPS satu sama lain adalah alat ukurnya, bukan pokok persoalannya."
+  },
+  {
+    "objectID": "teks.html#arah-yang-dilaporkan",
+    "href": "teks.html#arah-yang-dilaporkan",
+    "title": "Teks",
+    "section": "Arah yang dilaporkan",
+    "text": "Arah yang dilaporkan\n\n\n\n\n\n\nGaris “Naik” berada di atas “Turun” di sepanjang periode, tetapi jaraknya tidak tetap. Jarak itulah yang informatif, dan lebih mudah dibaca bila dijadikan rasio.\n\n\n\n\n\n\nRasio ini berperilaku seperti indeks sentimen, meski BPS tidak merancangnya demikian. Ada dua lembah dan dua puncak. Lembah pertama di 2015–2016 bertepatan dengan periode pelemahan harga komoditas dan pertumbuhan ekonomi Indonesia yang saat itu terendah sejak 2009. Lembah kedua, titik terendah seluruh rangkaian, jatuh pada 2020 — rasionya nyaris satu banding satu, artinya BPS hampir sama seringnya melaporkan penurunan dan kenaikan. Puncaknya muncul di 2022 pada 2,73 : 1, saat pemulihan pascapandemi berjalan.\nPerlu ditegaskan: ini bukan menunjukkan BPS memilih nada. Kata arah di BRS melekat pada angka yang dilaporkan, sehingga rasio ini memantulkan keadaan ekonomi yang diukur, bukan sikap penulisnya. Yang menarik justru karena itu — teks rilis statistik ternyata membawa jejak siklus ekonomi yang bisa dilacak tanpa menyentuh satu pun angkanya."
+  },
+  {
+    "objectID": "teks.html#krisis-yang-tidak-disebut-namanya",
+    "href": "teks.html#krisis-yang-tidak-disebut-namanya",
+    "title": "Teks",
+    "section": "Krisis yang tidak disebut namanya",
+    "text": "Krisis yang tidak disebut namanya\n\n\n\nKemunculan kosakata pandemi di korpus BRS. Sumber: BPS.\n\n\nKata\n2020\n2021\n2022\n2023\n\n\n\n\ncovid\n6\n10\n10\n10\n\n\npandemi\n1\n0\n0\n4\n\n\nppkm\n0\n0\n0\n1\n\n\npembatasan\n0\n0\n0\n1\n\n\n\n\n\nSepanjang 2020 BPS menerbitkan 97 Berita Resmi Statistik. Di seluruh teks itu, kata pandemi muncul satu kali dan covid enam kali. Bandingkan dengan grafik di atas: pada tahun yang sama, rasio arah jatuh ke titik terendah sebelas tahun.\nJejak pandemi di korpus ini ada pada angkanya, bukan pada kosakatanya. BPS tidak menamai krisis; ia melaporkan ekspor yang turun, kunjungan wisatawan yang anjlok, dan pengangguran yang naik. Ini sifat bahasa statistik resmi yang jarang disadari: registernya menahan diri dari penamaan peristiwa, dan menyerahkan seluruh beban makna kepada angka. Bagi pembaca umum, itu berarti rilis BPS menuntut konteks dari luar untuk dipahami — sebuah keterbatasan komunikasi, bukan keterbatasan data."
+  },
+  {
+    "objectID": "teks.html#telusuri-dokumennya",
+    "href": "teks.html#telusuri-dokumennya",
+    "title": "Teks",
+    "section": "Telusuri dokumennya",
+    "text": "Telusuri dokumennya\n\n\n\n\n\n\nDomain CSA\n\n\n\n\n\n\nTahun terbit\n\n\n\n\n\n\n\n\n\n\n\n\nKotak pencarian menyaring seluruh 1.121 judul secara langsung, dan penyaring di kiri membatasi domain serta periode terbit. Sumber: BPS — Berita Resmi Statistik via WebAPI BPS, diakses 2 Oktober 2026."
+  },
+  {
+    "objectID": "jaringan.html",
+    "href": "jaringan.html",
+    "title": "Jaringan ko-okurensi",
+    "section": "",
+    "text": "Dua kata dihubungkan bila keduanya muncul bersebelahan dalam satu dokumen setelah penyaringan kata fungsi. Bobot sisi adalah banyaknya kemunculan pasangan itu di seluruh korpus. Ukuran simpul mengkodekan kekuatan (jumlah bobot sisi yang melekat), warna mengkodekan komunitas hasil algoritma Louvain."
+  },
+  {
+    "objectID": "jaringan.html#graf-node-link",
+    "href": "jaringan.html#graf-node-link",
+    "title": "Jaringan ko-okurensi",
+    "section": "Graf node-link",
+    "text": "Graf node-link\n\nAmbang 100Ambang 50Ambang 200\n\n\n\n\n\n\n\n\n232 sisi, 143 simpul.\n\n\n\n\n\n\n\n\n481 sisi, 233 simpul — lebih padat, struktur tepi lebih terlihat.\n\n\n\n\n\n\n\n\n76 sisi, 59 simpul — hanya pasangan paling baku yang tersisa.\n\n\n\nKlik satu simpul untuk menyorot tetangganya, atau pakai kotak pencarian di atas grafik. Berpindah tab mengubah ambang bobot sisi. Sumber: BPS — Berita Resmi Statistik via WebAPI BPS, diakses 2 Oktober 2026.\nStruktur yang muncul bukan kebetulan. Simpul terbesar adalah naik dan turun, dan keduanya terhubung ke hampir semua kelompok lain, sejalan dengan apa yang terlihat pada rasio arah: kata arah adalah tulang punggung kalimat BRS, dan tiap subjek hanya menempelkan istilah teknisnya sendiri di sekelilingnya.\nKomunitas yang terbentuk ternyata memetakan subjek statistik tanpa pernah diberi tahu subjeknya. Terlihat gugus gabah–kualitas–giling–beras untuk survei harga produsen padi, kunjung–wisman untuk pariwisata, upah–nominal–buruh–tani untuk biaya tenaga kerja, dan ekspor–nonmigas–impor untuk perdagangan internasional. Algoritma Louvain bekerja murni dari pola kemunculan kata bersebelahan, namun kelompok yang dihasilkannya sejajar dengan taksonomi CSA pada halaman Hierarki. Itu petunjuk kuat bahwa tiap subjek BRS punya rumus kalimatnya sendiri yang nyaris tidak berubah antar rilis — sifat templatik korpus, yang semula hanya tampak sebagai rendahnya keragaman kosakata, kini terlihat sebagai struktur."
+  },
+  {
+    "objectID": "jaringan.html#representasi-kedua",
+    "href": "jaringan.html#representasi-kedua",
+    "title": "Jaringan ko-okurensi",
+    "section": "Representasi kedua",
+    "text": "Representasi kedua\n\n\n\n\n\n\nBaris dan kolom diurutkan menurut komunitas, sehingga blok pekat di sepanjang diagonal menandai kelompok kata yang saling terikat. Matriks tidak menderita tumpang tindih simpul seperti grafik node-link, sehingga pasangan lemah tetap terbaca — itu sebabnya dua representasi ini saling melengkapi.\nBlok diagonal yang rapi mengonfirmasi apa yang terlihat di grafik jaringan: kata-kata BRS mengelompok ketat per subjek dan jarang menyeberang. Dua baris yang justru tidak membentuk blok adalah naik dan turun — keduanya berwarna di hampir seluruh kolom. Itu gambaran paling ringkas dari temuan proyek ini: kosakata teknis BPS terpisah-pisah menurut subjek, tetapi kata arah dipakai bersama oleh semuanya."
+  },
+  {
+    "objectID": "hierarki.html",
+    "href": "hierarki.html",
+    "title": "Hierarki subjek",
+    "section": "",
+    "text": "BPS menggolongkan subjek statistiknya menurut Classification of Statistical Activities (CSA) v1.1, klasifikasi internasional yang dikelola UNECE. Nilai subj_id pada WebAPI ternyata mengikuti urutan kode CSA, sehingga hierarki empat tingkat — Domain, Divisi, Subjek, Dokumen — dapat direkonstruksi persis dan bukan hasil pengelompokan sendiri.\nUkuran mengkodekan jumlah dokumen, warna mengkodekan rata-rata panjang dokumen — dua variabel berbeda. Klik sebuah wilayah untuk menelusuri ke tingkat di bawahnya; treemap menampilkan jejak navigasi di bagian atas sehingga posisi penelusuran selalu terlihat.\nYang langsung terlihat adalah ketimpangannya. Satu divisi — Harga — menempati hampir seperempat seluruh korpus sendirian, karena rilis inflasi, Nilai Tukar Petani, dan harga produsen terbit setiap bulan tanpa putus. Sementara itu seluruh Domain 1, yang memuat kemiskinan, ketenagakerjaan, pendidikan, dan gender, mengerut menjadi sebaris kotak kecil di tepi. Frekuensi terbit mengikuti frekuensi pengukuran, bukan bobot persoalannya: statistik harga diukur bulanan sehingga dirilis bulanan, sementara kemiskinan dan ketenagakerjaan diukur dua kali setahun.\nWarna membawa lapisan kedua. Perhatikan bahwa subjek dengan dokumen paling banyak justru cenderung berwarna muda, yaitu abstraknya pendek: rilis rutin bulanan ditulis ringkas dan berpola, sedangkan rilis yang jarang muncul — sensus, survei khusus, indeks tahunan — ditulis jauh lebih panjang. Ada pertukaran antara rutinitas dan kedalaman di dalam cara BPS berkomunikasi.\nSatu lagi yang hanya terlihat dari hierarki: kode CSA 2.4.2, Energi, tidak pernah sekali pun muncul sepanjang sebelas tahun. Ada subjek yang punya tempat resmi di klasifikasi tetapi tidak pernah diisi sebagai Berita Resmi Statistik."
+  },
+  {
+    "objectID": "hierarki.html#rincian-per-subjek",
+    "href": "hierarki.html#rincian-per-subjek",
+    "title": "Hierarki subjek",
+    "section": "Rincian per subjek",
+    "text": "Rincian per subjek\n\n\n\n\n\n\nSumber: BPS — Berita Resmi Statistik via WebAPI BPS, diakses 2 Oktober 2026."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Bahasa Statistik Resmi",
     "section": "",
-    "text": "Setiap bulan BPS menerbitkan Berita Resmi Statistik — rilis resmi yang jadi pintu utama angka statistik nasional masuk ke ruang publik. Proyek ini tidak menganalisis angkanya, melainkan teksnya: apa yang dipilih BPS untuk diberitakan, kata apa yang dipakainya, dan bagaimana subjek-subjek itu tersusun."
+    "text": "Setiap bulan BPS menerbitkan Berita Resmi Statistik — rilis resmi yang jadi pintu utama angka statistik nasional masuk ke ruang publik. Proyek ini tidak menganalisis angkanya, melainkan teksnya: apa yang dipilih BPS untuk diberitakan, kata apa yang dipakainya, dan bagaimana subjek-subjek itu tersusun.\n\n\n\n\n\n\n\n\n\n1,121\nDokumen BRS, 2015–2025\n\n\n22\nSubjek statistik (CSA v1.1)\n\n\n89.5%\nBerasal dari domain Ekonomi\n\n\n1.69×\nKabar naik dibanding turun\n\n\n\n\nTiga temuan\nHampir sembilan dari sepuluh BRS adalah statistik ekonomi. Statistik demografi dan sosial — kemiskinan, ketenagakerjaan, gender, pendidikan — hanya mengisi sebagian kecil. Apa yang rutin dikomunikasikan BPS ke publik jauh lebih sempit daripada apa yang diukurnya.\nBPS menuliskan kenaikan hampir dua kali lebih sering daripada penurunan. Rasionya 1.69 banding satu, dan rasio itu bergerak mengikuti siklus ekonomi: terendah pada 2020, tertinggi pada 2022.\nBahasa BRS adalah bahasa template. Dari ratusan ribu kata, kosakata uniknya hanya ratusan. Kalimat-kalimatnya berulang nyaris identik dari bulan ke bulan, yang membuat frekuensi kata mentah nyaris tak berguna dan menuntut pembobotan TF-IDF untuk melihat apa yang sebenarnya membedakan tiap subjek.\n\n\nSusunan proyek\nVisualisasi dibagi menjadi tiga topik, masing-masing pada halamannya sendiri.\n\n\n\n\n\n\nTeks\nFrekuensi kata, kekhasan subjek lewat TF-IDF, arah perubahan yang dilaporkan sepanjang sebelas tahun, dan penelusuran seluruh dokumen.\n\n\nJaringan\nKo-okurensi kata sebagai graf berbobot dengan sentralitas dan komunitas, plus matriks ketetanggaan sebagai representasi kedua.\n\n\nHierarki\nTaksonomi CSA empat tingkat — Domain, Divisi, Subjek, Dokumen — dalam bentuk sunburst dan treemap.\n\n\n\nCatatan sumber data, keputusan pra-pemrosesan, dan keterbatasan ada di halaman Metodologi.\n\n\n\n\n\n\nData dan kode terbuka. Seluruh skrip pengambilan data, pra-pemrosesan, dan analisis tersedia di repositori GitHub beserta data terolahnya, sehingga hasil di situs ini dapat direproduksi penuh."
   },
   {
-    "objectID": "index.html#kata-yang-paling-sering-muncul",
-    "href": "index.html#kata-yang-paling-sering-muncul",
-    "title": "Bahasa Statistik Resmi",
-    "section": "Kata yang paling sering muncul",
-    "text": "Kata yang paling sering muncul\n\n\n\n\n\n\n\n\nGambar 1\n\n\n\n\nDiagram batang dipilih di sini, bukan word cloud. Keduanya mengkodekan besaran yang sama, tetapi batang memakai posisi dan panjang, sedangkan awan kata memakai luas area dan ukuran huruf. Dalam hierarki ketepatan persepsi Cleveland–McGill, posisi pada skala bersama adalah saluran paling akurat dan luas area termasuk yang paling tidak akurat. Awan kata juga menyulitkan pembandingan dua kata yang berdekatan nilainya, dan panjang kata ikut memengaruhi kesan besarnya."
+    "objectID": "metodologi.html",
+    "href": "metodologi.html",
+    "title": "Metodologi",
+    "section": "",
+    "text": "Berita Resmi Statistik, Badan Pusat Statistik, domain nasional (kode 0000), tahun terbit 2015–2025, diambil melalui WebAPI BPS dengan model pressrelease pada 2 Oktober 2026. Seluruh 1121 dokumen yang dikembalikan API dipakai; tidak ada yang dibuang.\nTiap dokumen membawa pengenal, subjek statistik, judul, abstrak, dan tanggal rilis. Analisis dilakukan atas judul dan abstrak."
   },
   {
-    "objectID": "index.html#kata-yang-paling-khas-tiap-subjek",
-    "href": "index.html#kata-yang-paling-khas-tiap-subjek",
-    "title": "Bahasa Statistik Resmi",
-    "section": "Kata yang paling khas tiap subjek",
-    "text": "Kata yang paling khas tiap subjek\n\n\n\n\n\n\n\n\nGambar 2\n\n\n\n\n\nTF-IDF memberi bobot tinggi pada kata yang sering muncul di satu subjek tetapi jarang di subjek lain. Tiap subjek diberi panel sendiri — bukan satu diagram gabungan — karena yang ingin dibandingkan adalah peringkat di dalam subjek, bukan besaran antar subjek. Skor TF-IDF antar subjek pun tidak sebanding besarannya, sehingga menumpuknya dalam satu sumbu justru menyesatkan. Panel kecil juga membuat sumbu-y tiap subjek bisa berisi kata yang berbeda, yang mustahil pada satu diagram tunggal.\nHasilnya memperlihatkan sesuatu yang tidak terlihat pada frekuensi mentah: tiap subjek punya kosakata teknisnya sendiri yang nyaris tidak dipakai subjek lain. Pariwisata hidup di wisman, penghunian, dan bintang; Pertanian di hektare, panen, dan pipilan — satuan dan istilah teknis pengukuran padi. Kemiskinan dikenali dari gini dan garis, dua konsep pengukuran, bukan dari kata bermuatan emosi seperti “miskin” atau “sulit”. Pola yang sama berulang di seluruh panel: yang membedakan subjek BPS satu sama lain adalah alat ukurnya, bukan pokok persoalannya."
+    "objectID": "metodologi.html#sumber-data",
+    "href": "metodologi.html#sumber-data",
+    "title": "Metodologi",
+    "section": "",
+    "text": "Berita Resmi Statistik, Badan Pusat Statistik, domain nasional (kode 0000), tahun terbit 2015–2025, diambil melalui WebAPI BPS dengan model pressrelease pada 2 Oktober 2026. Seluruh 1121 dokumen yang dikembalikan API dipakai; tidak ada yang dibuang.\nTiap dokumen membawa pengenal, subjek statistik, judul, abstrak, dan tanggal rilis. Analisis dilakukan atas judul dan abstrak."
   },
   {
-    "objectID": "index.html#arah-yang-dilaporkan",
-    "href": "index.html#arah-yang-dilaporkan",
-    "title": "Bahasa Statistik Resmi",
-    "section": "Arah yang dilaporkan",
-    "text": "Arah yang dilaporkan\n\n\n\n\n\n\n\n\nGambar 3\n\n\n\n\nGaris “Naik” berada di atas “Turun” di sepanjang periode, tetapi jaraknya tidak tetap. Jarak itulah yang informatif, dan lebih mudah dibaca bila dijadikan rasio.\n\n\n\n\n\n\n\n\nGambar 4\n\n\n\n\nRasio ini berperilaku seperti indeks sentimen, meski BPS tidak merancangnya demikian. Ada dua lembah dan dua puncak. Lembah pertama di 2015–2016 bertepatan dengan periode pelemahan harga komoditas dan pertumbuhan ekonomi Indonesia yang saat itu terendah sejak 2009. Lembah kedua, titik terendah seluruh rangkaian, jatuh pada 2020 — rasionya nyaris satu banding satu, artinya BPS hampir sama seringnya melaporkan penurunan dan kenaikan. Puncaknya muncul di 2022 pada 2,73 : 1, saat pemulihan pascapandemi berjalan.\nPerlu ditegaskan: ini bukan menunjukkan BPS memilih nada. Kata arah di BRS melekat pada angka yang dilaporkan, sehingga rasio ini memantulkan keadaan ekonomi yang diukur, bukan sikap penulisnya. Yang menarik justru karena itu — teks rilis statistik ternyata membawa jejak siklus ekonomi yang bisa dilacak tanpa menyentuh satu pun angkanya."
+    "objectID": "metodologi.html#pra-pemrosesan",
+    "href": "metodologi.html#pra-pemrosesan",
+    "title": "Metodologi",
+    "section": "Pra-pemrosesan",
+    "text": "Pra-pemrosesan\nTahapannya berurutan: pembersihan markup, pelekatan taksonomi, case folding, tokenisasi, penyaringan stopword, penyaringan frekuensi, lalu stemming. Seluruhnya dapat direproduksi dari skrip di repositori.\nPembersihan markup membedakan tag blok dan tag inline. Abstrak BRS disimpan sebagai HTML hasil ekspor Microsoft Word. Menghapus semua tag tanpa spasi menyambungkan kata antar paragraf; menggantinya dengan spasi membelah kata yang terpotong &lt;span&gt;. Keduanya ditangani terpisah: tag blok diganti spasi, tag inline dihapus.\nStemming memakai algoritma Nazief & Andriani melalui paket katadasaR, dijalankan atas kosakata unik lalu digabungkan kembali ke korpus. Pendekatan ini memberi hasil identik dengan menstem seluruh token, dengan waktu komputasi jauh lebih singkat.\nDaftar istilah terlindungi dikecualikan dari stemming. Nazief & Andriani tidak mengenali nama diri, sehingga tanpa penanganan khusus Bali menjadi bal, Bekasi menjadi bekas, dan ASEAN menjadi ase. Daftar nama wilayah, negara, dan akronim disusun untuk mengatasinya.\nKata arah dikembalikan dari daftar stopword. Daftar stopwords-iso Bahasa Indonesia membuang naik, tinggi, besar, dan kecil, tetapi membiarkan turun, rendah, dan tumbuh. Pada korpus yang isinya laporan perubahan angka, ketimpangan itu membalik kesimpulan: tanpa koreksi, data seolah menunjukkan BPS lebih sering melaporkan penurunan. Lima belas kata arah dan besaran karena itu dikembalikan secara eksplisit.\nAmbang frekuensi lima kemunculan membuang salah ketik pada sumber seperti febuari dan okober, dengan konsekuensi kata langka yang sahih ikut terbuang."
   },
   {
-    "objectID": "index.html#krisis-yang-tidak-disebut-namanya",
-    "href": "index.html#krisis-yang-tidak-disebut-namanya",
-    "title": "Bahasa Statistik Resmi",
-    "section": "Krisis yang tidak disebut namanya",
-    "text": "Krisis yang tidak disebut namanya\n\n\n\n\nTabel 1: Kemunculan kosakata pandemi di korpus BRS. Sumber: BPS.\n\n\n\n\n\n\nKata\n2020\n2021\n2022\n2023\n\n\n\n\ncovid\n6\n10\n10\n10\n\n\npandemi\n1\n0\n0\n4\n\n\nppkm\n0\n0\n0\n1\n\n\npembatasan\n0\n0\n0\n1\n\n\n\n\n\n\n\n\nSepanjang 2020 BPS menerbitkan 97 Berita Resmi Statistik. Di seluruh teks itu, kata pandemi muncul satu kali dan covid enam kali. Bandingkan dengan grafik di atas: pada tahun yang sama, rasio arah jatuh ke titik terendah sebelas tahun.\nJejak pandemi di korpus ini ada pada angkanya, bukan pada kosakatanya. BPS tidak menamai krisis; ia melaporkan ekspor yang turun, kunjungan wisatawan yang anjlok, dan pengangguran yang naik. Ini sifat bahasa statistik resmi yang jarang disadari: registernya menahan diri dari penamaan peristiwa, dan menyerahkan seluruh beban makna kepada angka. Bagi pembaca umum, itu berarti rilis BPS menuntut konteks dari luar untuk dipahami — sebuah keterbatasan komunikasi, bukan keterbatasan data."
+    "objectID": "metodologi.html#keputusan-rancangan-visual",
+    "href": "metodologi.html#keputusan-rancangan-visual",
+    "title": "Metodologi",
+    "section": "Keputusan rancangan visual",
+    "text": "Keputusan rancangan visual\nDiagram batang menggantikan word cloud. Posisi pada skala bersama adalah saluran persepsi paling akurat dalam hierarki Cleveland–McGill; luas area dan ukuran huruf termasuk yang paling tidak akurat.\nPanel kecil untuk TF-IDF. Skor TF-IDF antar subjek tidak sebanding besarannya, sehingga satu sumbu bersama akan menyesatkan. Panel terpisah juga memungkinkan tiap subjek menampilkan kata yang berbeda.\nPalet Okabe-Ito untuk kategori, skala satu rona biru untuk nilai berurutan. Keduanya tetap terbaca pada deuteranopia, protanopia, dan tritanopia. Skala satu rona dipilih atas skala pelangi karena urutannya tetap jelas tanpa bergantung pada pembedaan rona.\nUkuran dan warna mengkodekan variabel berbeda pada sunburst dan treemap: jumlah dokumen dan rata-rata panjang dokumen."
   },
   {
-    "objectID": "index.html#telusuri-dokumennya",
-    "href": "index.html#telusuri-dokumennya",
-    "title": "Bahasa Statistik Resmi",
-    "section": "Telusuri dokumennya",
-    "text": "Telusuri dokumennya\n\n\n\n\nTabel 2\n\n\n\n\n\n\n\nDomain CSA\n\n\n\n\n\n\nTahun terbit\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKotak pencarian menyaring seluruh 1.121 judul secara langsung, dan penyaring di kiri membatasi domain serta periode terbit."
+    "objectID": "metodologi.html#keterbatasan",
+    "href": "metodologi.html#keterbatasan",
+    "title": "Metodologi",
+    "section": "Keterbatasan",
+    "text": "Keterbatasan\nArtefak markup. Pembersihan menekan penyambungan dan pembelahan kata, tetapi sisa kesalahan kecil masih mungkin ada.\nSalah ketik pada sumber. Korpus mengandung salah ketik asli dari BPS. Penyaringan frekuensi membuang sebagian besarnya, dengan konsekuensi kata langka yang sahih ikut terbuang.\nKeterbatasan stemmer. Daftar istilah terlindungi tidak dijamin lengkap.\nDokumen tanpa subjek. Sebelas dokumen tidak membawa subj_id dari API dan diberi label Tidak Berkategori alih-alih dibuang, agar jumlah korpus tetap utuh.\nDaftar stopword tidak netral. Daftar stopword disusun untuk teks umum, bukan untuk laporan statistik. Pemakaiannya tanpa pemeriksaan adalah sumber kesalahan yang mudah luput, sebagaimana terlihat pada kasus kata arah di atas.\nCakupan. Analisis terbatas pada judul dan abstrak, bukan isi penuh PDF rilis. Kesimpulan berlaku untuk apa yang BPS ringkaskan di muka, bukan untuk keseluruhan isi tiap rilis.\nKaitan dengan peristiwa luar. Hubungan antara rasio arah dan siklus ekonomi bersifat deskriptif. Analisis ini tidak menguji sebab-akibat dan tidak menyertakan variabel makroekonomi sebagai pembanding."
   },
   {
-    "objectID": "index.html#representasi-kedua-matriks-ketetanggaan",
-    "href": "index.html#representasi-kedua-matriks-ketetanggaan",
-    "title": "Bahasa Statistik Resmi",
-    "section": "Representasi kedua: matriks ketetanggaan",
-    "text": "Representasi kedua: matriks ketetanggaan\n\n\n\n\n\n\n\n\nGambar 8\n\n\n\n\nBaris dan kolom diurutkan menurut komunitas, sehingga blok pekat di sepanjang diagonal menandai kelompok kata yang saling terikat. Matriks tidak menderita tumpang tindih simpul seperti grafik node-link, sehingga pasangan lemah tetap terbaca — itu sebabnya dua representasi ini saling melengkapi. Sumber: BPS — Berita Resmi Statistik via WebAPI BPS, diakses 2 Oktober 2026.\nBlok diagonal yang rapi mengonfirmasi apa yang terlihat di grafik jaringan: kata-kata BRS mengelompok ketat per subjek dan jarang menyeberang. Dua baris yang justru tidak membentuk blok adalah naik dan turun — keduanya berwarna di hampir seluruh kolom. Itu gambaran paling ringkas dari temuan proyek ini: kosakata teknis BPS terpisah-pisah menurut subjek, tetapi kata arah dipakai bersama oleh semuanya."
+    "objectID": "metodologi.html#perangkat",
+    "href": "metodologi.html#perangkat",
+    "title": "Metodologi",
+    "section": "Perangkat",
+    "text": "Perangkat\nR dengan dplyr, stringr, tidytext, stopwords, katadasaR, dan igraph untuk pengolahan; plotly, ggplot2, visNetwork, DT, dan crosstalk untuk visualisasi; Quarto untuk penyusunan laman; GitHub Pages untuk deployment."
+  },
+  {
+    "objectID": "metodologi.html#penggunaan-alat-bantu-ai",
+    "href": "metodologi.html#penggunaan-alat-bantu-ai",
+    "title": "Metodologi",
+    "section": "Penggunaan alat bantu AI",
+    "text": "Penggunaan alat bantu AI\nSesuai ketentuan integritas akademik pada soal, saya mendeklarasikan penggunaan alat bantu berbasis AI. Saya memakai Claude (Anthropic) sebagai alat bantu dalam penulisan skrip R, perancangan struktur dasbor, dan pemeriksaan kualitas pra-pemrosesan.\nSaya menentukan sendiri tema dan ruang lingkup proyek, menjalankan seluruh pipeline pengolahan, memeriksa dan memvalidasi setiap keluaran pada tiap tahap, serta menetapkan arah rancangan visual dan kedalaman interpretasi. Seluruh isi proyek, termasuk temuan dan pembahasannya, menjadi tanggung jawab penuh saya."
   }
 ]

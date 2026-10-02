@@ -1,0 +1,114 @@
+---
+title: "Hierarki subjek"
+subtitle: "Taksonomi CSA empat tingkat, dan ketimpangan yang terlihat darinya"
+---
+
+```{r}
+#| include: false
+source("_common.R")
+```
+
+BPS menggolongkan subjek statistiknya menurut *Classification of Statistical
+Activities* (CSA) v1.1, klasifikasi internasional yang dikelola UNECE. Nilai
+`subj_id` pada WebAPI ternyata mengikuti urutan kode CSA, sehingga hierarki
+empat tingkat — Domain, Divisi, Subjek, Dokumen — dapat direkonstruksi persis
+dan bukan hasil pengelompokan sendiri.
+
+::: {.panel-tabset}
+
+## Sunburst
+
+```{r}
+#| label: grafik-sunburst
+#| fig-height: 7
+
+plot_ly(
+  pohon,
+  ids = ~id, labels = ~label, parents = ~parent, values = ~nilai,
+  marker = list(colors = ~warna, colorscale = BIRU_SKALA,
+                line = list(color = LATAR, width = 1.5),
+                colorbar = list(title = list(text = "Rata-rata<br>kata",
+                                             font = list(size = 11)),
+                                len = 0.5, thickness = 12, outlinewidth = 0,
+                                tickfont = list(size = 10, color = REDUP))),
+  type = "sunburst", branchvalues = "total", maxdepth = 3,
+  insidetextfont = list(family = SANS, size = 12),
+  hovertemplate = paste0("<b>%{label}</b><br>%{value} dokumen",
+                         "<br>Rata-rata %{color} kata<extra></extra>")
+) |>
+  layout(title = judul("Hierarki subjek CSA",
+                       "Ukuran = jumlah dokumen · Warna = rata-rata panjang dokumen")) |>
+  rapikan()
+```
+
+## Treemap
+
+```{r}
+#| label: grafik-treemap
+#| fig-height: 7
+
+plot_ly(
+  pohon,
+  ids = ~id, labels = ~label, parents = ~parent, values = ~nilai,
+  marker = list(colors = ~warna, colorscale = BIRU_SKALA,
+                line = list(color = LATAR, width = 1.5),
+                colorbar = list(title = list(text = "Rata-rata<br>kata",
+                                             font = list(size = 11)),
+                                len = 0.5, thickness = 12, outlinewidth = 0,
+                                tickfont = list(size = 10, color = REDUP))),
+  type = "treemap", branchvalues = "total",
+  pathbar = list(visible = TRUE, thickness = 22),
+  insidetextfont = list(family = SANS, size = 12),
+  hovertemplate = paste0("<b>%{label}</b><br>%{value} dokumen",
+                         "<br>Rata-rata %{color} kata<extra></extra>")
+) |>
+  layout(title = judul("Hierarki subjek CSA",
+                       "Klik untuk menelusuri ke bawah · jejak navigasi di bagian atas")) |>
+  rapikan()
+```
+
+:::
+
+Ukuran mengkodekan jumlah dokumen, warna mengkodekan rata-rata panjang
+dokumen — dua variabel berbeda. Klik sebuah wilayah untuk menelusuri ke
+tingkat di bawahnya; *treemap* menampilkan jejak navigasi di bagian atas
+sehingga posisi penelusuran selalu terlihat.
+
+Yang langsung terlihat adalah ketimpangannya. Satu divisi — Harga — menempati
+hampir seperempat seluruh korpus sendirian, karena rilis inflasi, Nilai Tukar
+Petani, dan harga produsen terbit setiap bulan tanpa putus. Sementara itu
+seluruh Domain 1, yang memuat kemiskinan, ketenagakerjaan, pendidikan, dan
+gender, mengerut menjadi sebaris kotak kecil di tepi. **Frekuensi terbit
+mengikuti frekuensi pengukuran, bukan bobot persoalannya**: statistik harga
+diukur bulanan sehingga dirilis bulanan, sementara kemiskinan dan
+ketenagakerjaan diukur dua kali setahun.
+
+Warna membawa lapisan kedua. Perhatikan bahwa subjek dengan dokumen paling
+banyak justru cenderung berwarna muda, yaitu abstraknya pendek: rilis rutin
+bulanan ditulis ringkas dan berpola, sedangkan rilis yang jarang muncul —
+sensus, survei khusus, indeks tahunan — ditulis jauh lebih panjang. Ada
+pertukaran antara **rutinitas dan kedalaman** di dalam cara BPS berkomunikasi.
+
+Satu lagi yang hanya terlihat dari hierarki: kode CSA 2.4.2, Energi, **tidak
+pernah sekali pun muncul** sepanjang sebelas tahun. Ada subjek yang punya
+tempat resmi di klasifikasi tetapi tidak pernah diisi sebagai Berita Resmi
+Statistik.
+
+## Rincian per subjek
+
+```{r}
+#| label: tabel-hierarki
+
+hierarki |>
+  arrange(desc(n_dokumen)) |>
+  transmute(`Kode CSA` = kode_csa, Domain = str_trunc(domain, 30),
+            Divisi = divisi, Subjek = str_trunc(subjek, 45),
+            Dokumen = n_dokumen, `Rata-rata kata` = rata_kata,
+            Periode = paste0(tahun_awal, "–", tahun_akhir)) |>
+  datatable(rownames = FALSE,
+            options = list(pageLength = 10, dom = "ftp",
+                           language = list(search = "Cari:")),
+            class = "compact stripe hover")
+```
+
+*Sumber: BPS — Berita Resmi Statistik via WebAPI BPS, diakses 2 Oktober 2026.*

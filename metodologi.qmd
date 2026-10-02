@@ -1,0 +1,117 @@
+---
+title: "Metodologi"
+subtitle: "Sumber data, pra-pemrosesan, keputusan rancangan, dan keterbatasan"
+---
+```{r}
+#| include: false
+source("_common.R")
+```
+
+## Sumber data
+
+Berita Resmi Statistik, Badan Pusat Statistik, domain nasional (kode `0000`),
+tahun terbit 2015–2025, diambil melalui [WebAPI BPS](https://webapi.bps.go.id)
+dengan model `pressrelease` pada 2 Oktober 2026. Seluruh `r n_dok` dokumen
+yang dikembalikan API dipakai; tidak ada yang dibuang.
+
+Tiap dokumen membawa pengenal, subjek statistik, judul, abstrak, dan tanggal
+rilis. Analisis dilakukan atas judul dan abstrak.
+
+## Pra-pemrosesan
+
+Tahapannya berurutan: pembersihan markup, pelekatan taksonomi, *case folding*,
+tokenisasi, penyaringan stopword, penyaringan frekuensi, lalu stemming.
+Seluruhnya dapat direproduksi dari skrip di
+[repositori](https://github.com/Harq01/visdat-brs).
+
+**Pembersihan markup membedakan tag blok dan tag inline.** Abstrak BRS
+disimpan sebagai HTML hasil ekspor Microsoft Word. Menghapus semua tag tanpa
+spasi menyambungkan kata antar paragraf; menggantinya dengan spasi membelah
+kata yang terpotong `<span>`. Keduanya ditangani terpisah: tag blok diganti
+spasi, tag inline dihapus.
+
+**Stemming memakai algoritma Nazief & Andriani** melalui paket `katadasaR`,
+dijalankan atas kosakata unik lalu digabungkan kembali ke korpus. Pendekatan
+ini memberi hasil identik dengan menstem seluruh token, dengan waktu
+komputasi jauh lebih singkat.
+
+**Daftar istilah terlindungi dikecualikan dari stemming.** Nazief & Andriani
+tidak mengenali nama diri, sehingga tanpa penanganan khusus *Bali* menjadi
+*bal*, *Bekasi* menjadi *bekas*, dan *ASEAN* menjadi *ase*. Daftar nama
+wilayah, negara, dan akronim disusun untuk mengatasinya.
+
+**Kata arah dikembalikan dari daftar stopword.** Daftar `stopwords-iso`
+Bahasa Indonesia membuang *naik*, *tinggi*, *besar*, dan *kecil*, tetapi
+membiarkan *turun*, *rendah*, dan *tumbuh*. Pada korpus yang isinya laporan
+perubahan angka, ketimpangan itu membalik kesimpulan: tanpa koreksi, data
+seolah menunjukkan BPS lebih sering melaporkan penurunan. Lima belas kata arah
+dan besaran karena itu dikembalikan secara eksplisit.
+
+**Ambang frekuensi lima kemunculan** membuang salah ketik pada sumber seperti
+*febuari* dan *okober*, dengan konsekuensi kata langka yang sahih ikut
+terbuang.
+
+## Keputusan rancangan visual
+
+**Diagram batang menggantikan word cloud.** Posisi pada skala bersama adalah
+saluran persepsi paling akurat dalam hierarki Cleveland–McGill; luas area dan
+ukuran huruf termasuk yang paling tidak akurat.
+
+**Panel kecil untuk TF-IDF.** Skor TF-IDF antar subjek tidak sebanding
+besarannya, sehingga satu sumbu bersama akan menyesatkan. Panel terpisah juga
+memungkinkan tiap subjek menampilkan kata yang berbeda.
+
+**Palet Okabe-Ito untuk kategori, skala satu rona biru untuk nilai
+berurutan.** Keduanya tetap terbaca pada deuteranopia, protanopia, dan
+tritanopia. Skala satu rona dipilih atas skala pelangi karena urutannya tetap
+jelas tanpa bergantung pada pembedaan rona.
+
+**Ukuran dan warna mengkodekan variabel berbeda** pada sunburst dan treemap:
+jumlah dokumen dan rata-rata panjang dokumen.
+
+## Keterbatasan
+
+**Artefak markup.** Pembersihan menekan penyambungan dan pembelahan kata,
+tetapi sisa kesalahan kecil masih mungkin ada.
+
+**Salah ketik pada sumber.** Korpus mengandung salah ketik asli dari BPS.
+Penyaringan frekuensi membuang sebagian besarnya, dengan konsekuensi kata
+langka yang sahih ikut terbuang.
+
+**Keterbatasan stemmer.** Daftar istilah terlindungi tidak dijamin lengkap.
+
+**Dokumen tanpa subjek.** Sebelas dokumen tidak membawa `subj_id` dari API dan
+diberi label *Tidak Berkategori* alih-alih dibuang, agar jumlah korpus tetap
+utuh.
+
+**Daftar stopword tidak netral.** Daftar stopword disusun untuk teks umum,
+bukan untuk laporan statistik. Pemakaiannya tanpa pemeriksaan adalah sumber
+kesalahan yang mudah luput, sebagaimana terlihat pada kasus kata arah di atas.
+
+**Cakupan.** Analisis terbatas pada judul dan abstrak, bukan isi penuh PDF
+rilis. Kesimpulan berlaku untuk apa yang BPS ringkaskan di muka, bukan untuk
+keseluruhan isi tiap rilis.
+
+**Kaitan dengan peristiwa luar.** Hubungan antara rasio arah dan siklus
+ekonomi bersifat deskriptif. Analisis ini tidak menguji sebab-akibat dan tidak
+menyertakan variabel makroekonomi sebagai pembanding.
+
+## Perangkat
+
+R dengan `dplyr`, `stringr`, `tidytext`, `stopwords`, `katadasaR`, dan
+`igraph` untuk pengolahan; `plotly`, `ggplot2`, `visNetwork`, `DT`, dan
+`crosstalk` untuk visualisasi; Quarto untuk penyusunan laman; GitHub Pages
+untuk *deployment*.
+
+## Penggunaan alat bantu AI
+
+Sesuai ketentuan integritas akademik pada soal, saya mendeklarasikan
+penggunaan alat bantu berbasis AI. Saya memakai Claude (Anthropic) sebagai
+alat bantu dalam penulisan skrip R, perancangan struktur dasbor, dan
+pemeriksaan kualitas pra-pemrosesan.
+
+Saya menentukan sendiri tema dan ruang lingkup proyek, menjalankan seluruh
+pipeline pengolahan, memeriksa dan memvalidasi setiap keluaran pada tiap
+tahap, serta menetapkan arah rancangan visual dan kedalaman interpretasi.
+Seluruh isi proyek, termasuk temuan dan pembahasannya, menjadi tanggung jawab
+penuh saya.
