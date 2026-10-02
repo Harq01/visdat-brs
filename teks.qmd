@@ -197,12 +197,13 @@ plot_ly(rasio_thn, x = ~tahun, y = ~rasio, type = "scatter",
 ```
 
 Rasio ini berperilaku seperti indeks sentimen, meski BPS tidak merancangnya
-demikian. Ada dua lembah dan dua puncak. Lembah pertama di 2015–2016
-bertepatan dengan periode pelemahan harga komoditas dan pertumbuhan ekonomi
-Indonesia yang saat itu terendah sejak 2009. Lembah kedua, **titik terendah
-seluruh rangkaian, jatuh pada 2020** — rasionya nyaris satu banding satu,
-artinya BPS hampir sama seringnya melaporkan penurunan dan kenaikan. Puncaknya
-muncul di 2022 pada 2,73 : 1, saat pemulihan pascapandemi berjalan.
+demikian. Ada dua lembah dan dua puncak. Lembah pertama di 2015–2016, pada
+1,23 dan 1,24, bertepatan dengan periode pelemahan harga komoditas dan
+pertumbuhan ekonomi Indonesia yang saat itu terendah sejak 2009. Lembah kedua,
+**titik terendah seluruh rangkaian, jatuh pada 2020 di angka 1,05** — praktis
+satu banding satu, artinya BPS hampir sama seringnya melaporkan penurunan dan
+kenaikan. Puncaknya muncul di 2022 pada 2,49 : 1, saat pemulihan pascapandemi
+berjalan.
 
 Perlu ditegaskan: ini **bukan** menunjukkan BPS memilih nada. Kata arah di BRS
 melekat pada angka yang dilaporkan, sehingga rasio ini memantulkan keadaan
